@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="Andy" />
+
+
+
+<meta name="description" content="需求与设计使用面部识别技术，识别进出重要通道的人员，并对人员进出动作进行记录。在人员进出时，在摄像机前采集画面，使用采集到的画面与历史记录对比，如果人员已经存在出入记录，追加一条记录即可;如果不存在则新建记录。">
+<meta name="keywords" content="面部识别,pyqt,多线程,opencv,媒体播放,信号处理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于面部识别的日志系统的设计与实现">
+<meta property="og:url" content="http://mazingan.github.io/2018/06/27/基于面部识别的日志系统的设计与实现/index.html">
+<meta property="og:site_name" content="Andy&#39;s Blog">
+<meta property="og:description" content="需求与设计使用面部识别技术，识别进出重要通道的人员，并对人员进出动作进行记录。在人员进出时，在摄像机前采集画面，使用采集到的画面与历史记录对比，如果人员已经存在出入记录，追加一条记录即可;如果不存在则新建记录。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/78834-fccdb0d6dae9e02d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-06-27T13:44:06.479Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="基于面部识别的日志系统的设计与实现">
+<meta name="twitter:description" content="需求与设计使用面部识别技术，识别进出重要通道的人员，并对人员进出动作进行记录。在人员进出时，在摄像机前采集画面，使用采集到的画面与历史记录对比，如果人员已经存在出入记录，追加一条记录即可;如果不存在则新建记录。">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/78834-fccdb0d6dae9e02d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="Andy&#39;s Blog" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>基于面部识别的日志系统的设计与实现 | Andy&#39;s Blog</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: true
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">Andy</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">不会写作文的程序员不是一个好作家</p>
+        
+
+        
+            <form id="search-form">
+            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="false" />
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+            </form>
+            <div id="local-search-result"></div>
+            <p class='no-result'>No results found <i class='fa fa-spinner fa-pulse'></i></p>
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:andy2237@outlook.com" title="Email"></a>
+                            
+                                <a class="fa 简书" href="https://www.jianshu.com/u/3a0a7cae78b2" title="简书"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/读书/">-读书</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/django/">django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/namedtuple/">namedtuple</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx-rtmp/">nginx-rtmp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/opencv/">opencv</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pyqt/">pyqt</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/信号处理/">信号处理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/媒体播放/">媒体播放</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/流媒体/">流媒体</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络直播/">网络直播</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/跨域访问/">跨域访问</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面部识别/">面部识别</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于媳妇儿和python</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">Andy</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">Andy</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">不会写作文的程序员不是一个好作家</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:andy2237@outlook.com" title="Email"></a>
+                            
+                                <a class="fa 简书" target="_blank" href="https://www.jianshu.com/u/3a0a7cae78b2" title="简书"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-基于面部识别的日志系统的设计与实现" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/06/27/基于面部识别的日志系统的设计与实现/" class="article-date">
+      <time datetime="2018-06-27T13:30:23.000Z" itemprop="datePublished">2018-06-27</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      基于面部识别的日志系统的设计与实现
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/opencv/">opencv</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pyqt/">pyqt</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/信号处理/">信号处理</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/多线程/">多线程</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/媒体播放/">媒体播放</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/面部识别/">面部识别</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="需求与设计"><a href="#需求与设计" class="headerlink" title="需求与设计"></a>需求与设计</h2><p>使用面部识别技术，识别进出重要通道的人员，并对人员进出动作进行记录。在人员进出时，在摄像机前采集画面，使用采集到的画面与历史记录对比，如果人员已经存在出入记录，追加一条记录即可;如果不存在则新建记录。<br><a id="more"></a></p>
+<p>##技术与实现</p>
+<h3 id="核心技术"><a href="#核心技术" class="headerlink" title="核心技术"></a>核心技术</h3><p>使用Python来完成整个程序的编写，面部识别采用python开源库face_recognition, 基于dlib（C++实现）。<br>使用opencv来捕获视频流，支持本地摄像头和网络摄像头。<br>使用QThread创建线程更新每一帧图片到PyQt界面。</p>
+<h3 id="数据存储"><a href="#数据存储" class="headerlink" title="数据存储"></a>数据存储</h3><p>使用Sqlite3作为单机版数据库，同时支持MySQL数据库。<br>使用sqlite3进行数据存储。</p>
+<h3 id="前端界面"><a href="#前端界面" class="headerlink" title="前端界面"></a>前端界面</h3><p>使用PyQt4作为前端界面，使用绝对布局。</p>
+<h2 id="显示监控画面"><a href="#显示监控画面" class="headerlink" title="显示监控画面"></a>显示监控画面</h2><h3 id="opencv捕获摄像机视频流"><a href="#opencv捕获摄像机视频流" class="headerlink" title="opencv捕获摄像机视频流"></a>opencv捕获摄像机视频流</h3><p>Opencv捕获视频流，主要使用opencv的videoCapture方法， 传入摄像头物理地址（0-99）或者网络视频流地址。</p>
+<ul>
+<li>安装(Ubuntu)： <code>sudo apt install</code></li>
+<li>使用(Python2.7 代码示例):</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="comment">#以下的代码片段应当被放在单独的线程中</span></span><br><span class="line"><span class="comment">#使用videoCapture捕获视频</span></span><br><span class="line"><span class="comment">#address可以是usb摄像头的地址（0-99）</span></span><br><span class="line"><span class="comment">#address也可以是视频流的网络地址 如海康摄像机rtsp地址</span></span><br><span class="line">address = <span class="string">"rtsp://admin:12345@192.0.0.64:554/h264/ch1/main/av_stream"</span></span><br><span class="line">cap = cv2.videoCapture(address)</span><br><span class="line"><span class="comment">#当视频流捕获到以后，开始获取捕获的每一帧</span></span><br><span class="line"><span class="comment">#拿到的frame实际上是以矩阵的形式存储的，具体的数据结构是numpy的ndarray</span></span><br><span class="line"><span class="comment">#并转换为PyQt可以显示的QPixmap（图片）</span></span><br><span class="line"><span class="keyword">while</span> cap.isOpened():</span><br><span class="line">    ret, frame = cap.read()</span><br><span class="line">        <span class="comment">#拿到frame的信息，并从cv2默认的BGR模式转成RGB模式</span></span><br><span class="line">        height, width, fps = frame.shape</span><br><span class="line">        bytesPerLine = <span class="number">3</span> * width</span><br><span class="line">        cv2.cvtColor(frame, cv2.COLOR_BGR2RGB, frame)</span><br><span class="line">        <span class="comment">#然后在主线程中更新image,Pyqt4发送信号并传送image到主线程即可</span></span><br><span class="line">        image = QtGui.QImage(frame.data, width, height,bytesPerLine, QtGui.QImage.Format_RGB888)</span><br></pre></td></tr></table></figure>
+<h2 id="PyQt4子线程控制UI线程更新"><a href="#PyQt4子线程控制UI线程更新" class="headerlink" title="PyQt4子线程控制UI线程更新"></a>PyQt4子线程控制UI线程更新</h2><h4 id="使用场景一：子线程获取视频流的frame，主线程更新frame"><a href="#使用场景一：子线程获取视频流的frame，主线程更新frame" class="headerlink" title="使用场景一：子线程获取视频流的frame，主线程更新frame"></a>使用场景一：子线程获取视频流的frame，主线程更新frame</h4><p>#####使用QT提供的线程类：QThread</p>
+<p>使用opencv获取视频流之后，应在UI线程中更新获得的每一帧。<br>可以自定义一个控件，集成自QLabel，然后自定义信号，这个信号将会在自线程里被触发，在主线程里执行。</p>
+<p>具体实现方法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">VideoPlayer</span><span class="params">(QtGui.QLabel)</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, parent, address)</span>:</span></span><br><span class="line">		QtGui.QLabel.__init__(self, parent, address)</span><br><span class="line">		<span class="comment">#这里创建子线程，传递流媒体地址</span></span><br><span class="line">		self.video_provider = videoThread(address)</span><br><span class="line">		self.video_provider.start()</span><br><span class="line">		<span class="comment">#这里自定义一个信号，以便于在子线程里面触发更新帧的方法</span></span><br><span class="line">		self.connect(self.video_provider, QtCore.SIGNAL(<span class="string">'newImage(PyQt_PyObject)'</span>), self.setFrame)</span><br><span class="line">		<span class="comment">#这里创建一个当前帧，初始化为None，方便以后截图</span></span><br><span class="line">		self.current_frame = <span class="keyword">None</span></span><br><span class="line">	</span><br><span class="line">	<span class="comment">#这个方法将在newImage信号触发之后执行</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">setFrame</span><span class="params">(self)</span>:</span></span><br><span class="line">		pixmap = QtGui.QPixmap.fromImage(frame)</span><br><span class="line">		self.current_frame = pixmap</span><br><span class="line">		self.setPixmap(pixmap)</span><br></pre></td></tr></table></figure>
+<p>这样主线程（UI线程已经做好了所有的准备工作，接下来就是在子线程内获取视频的每一帧，然后发送信号过来）<br>创建一个线程类，继承QtCore.QThread</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#其实就是上面opencv的方法放在一个线程内</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">videoThread</span><span class="params">(QtCore.QThread)</span>:</span></span><br><span class="line">    <span class="string">'''线程类，负责更新视频的每一帧'''</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, address)</span>:</span></span><br><span class="line">        <span class="string">'''初始化的时候传入视频流的地址'''</span></span><br><span class="line">        super(videoThread, self).__init__()</span><br><span class="line">        self.address = address</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">run</span><span class="params">(self)</span>:</span></span><br><span class="line">	    <span class="string">'''重写run函数，读取到视频流之后不断更新frame到主线程'''</span></span><br><span class="line">        self.cap = cv2.VideoCapture(self.address)</span><br><span class="line">        <span class="keyword">while</span> self.cap.isOpened():</span><br><span class="line">            _, frame = self.cap.read()</span><br><span class="line">            <span class="keyword">if</span> frame <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">	            <span class="comment">#这里进行frame的转换</span></span><br><span class="line">                height, width, fps = frame.shape</span><br><span class="line">                bytesPerLine = <span class="number">3</span> * width</span><br><span class="line">                cv2.cvtColor(frame, cv2.COLOR_BGR2RGB, frame)</span><br><span class="line">                image = QtGui.QImage(frame.data, width, \</span><br><span class="line">                height,bytesPerLine, QtGui.QImage.Format_RGB888)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">	            <span class="comment">#如果没有拿到frame，则给一个摄像头连接失败的图片，递归，直到摄像头重新连接</span></span><br><span class="line">                image = QtGui.QImage(<span class="string">"./icons/no_video.png"</span>)</span><br><span class="line">                self.run()</span><br><span class="line">            <span class="comment">#在这里发送信号的主线程，主线程会自动执行之前定义的setFrame方法，更新图片</span></span><br><span class="line">            self.emit(QtCore.SIGNAL(<span class="string">'newImage(PyQt_PyObject)'</span>), image)</span><br><span class="line">        <span class="comment">#如果摄像头没有获取到，给链接失败的图片，然后递归</span></span><br><span class="line">        image = QtGui.QImage(<span class="string">"./icons/no_video.png"</span>)</span><br><span class="line">        self.emit(QtCore.SIGNAL(<span class="string">'newImage(PyQt_PyObject)'</span>), image)</span><br><span class="line">        self.run()</span><br></pre></td></tr></table></figure>
+<p>这样就可以在前端播放画面了。</p>
+<h4 id="使用场景二：视频的截屏，在子线程里截屏并保存到本地"><a href="#使用场景二：视频的截屏，在子线程里截屏并保存到本地" class="headerlink" title="使用场景二：视频的截屏，在子线程里截屏并保存到本地"></a>使用场景二：视频的截屏，在子线程里截屏并保存到本地</h4><h5 id="使用Python原声的threading-thread创建线程，只想简单工作"><a href="#使用Python原声的threading-thread创建线程，只想简单工作" class="headerlink" title="使用Python原声的threading.thread创建线程，只想简单工作"></a>使用Python原声的threading.thread创建线程，只想简单工作</h5><p>截屏的时候应当在界面显示：准备，3, 2, 1 的提示，这样的提示每一次间隔1秒钟，以便于给用户3秒的调整时间。 这样的工作必须在子线程内执行，否则在主线程内执行会阻断UI线程更新视频流的业务，造成视频卡顿。<br>实现方法： 首先创建一个用于显示提示消息的Label，然后在子线程里更新Label的text即可。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> PtQt4 <span class="keyword">import</span> QtGui, QtCore</span><br><span class="line"><span class="keyword">from</span> thread <span class="keyword">import</span> threading</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainWindow</span><span class="params">(QtGui.QWidget)</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">		<span class="comment">#...</span></span><br><span class="line">		<span class="comment">#...</span></span><br><span class="line">		self.notify_label = QtGui.QLabel(self)</span><br><span class="line">		self.take_photo_button = QtGui.QPushButton(self)</span><br><span class="line">		self.take_photo_button.setText(<span class="string">u"拍照"</span>)</span><br><span class="line">		self.connect(self.take_photo_button, QtCore.SIGNAL(<span class="string">"clicked()"</span>),\</span><br><span class="line">			self, QtCore.SOLT(<span class="string">"takePhoto()"</span>))</span><br><span class="line">	</span><br><span class="line">	<span class="comment">#自定义的槽，在class内应加上 装饰器</span></span><br><span class="line"><span class="meta">	@QtCore.pyqtSlot()</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">takePhoto</span><span class="params">(self)</span>:</span></span><br><span class="line">		thread = threading(target=self.updateNotifyAndTakePhoto)</span><br><span class="line">		thread.start()</span><br><span class="line">	</span><br><span class="line">	<span class="comment">#这里是真正进行提示和截图的方法</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">updateNotifyAndTakePhoto</span><span class="params">(self)</span>:</span></span><br><span class="line">		<span class="comment">#先进性一轮循环，显示四个提示，每一次间隔一秒，持续四秒</span></span><br><span class="line">		<span class="keyword">for</span> text <span class="keyword">in</span> [<span class="string">u"准备"</span>, <span class="string">'3'</span>, <span class="string">'2'</span>, <span class="string">'1'</span>]:</span><br><span class="line">	        self.notify_label.setText(text)</span><br><span class="line">            time.sleep(<span class="number">1</span>)</span><br><span class="line">        <span class="comment">#然后设置提示消息为空</span></span><br><span class="line">        self.notify_label.setText(<span class="string">""</span>)</span><br><span class="line">        <span class="comment">#开始截图</span></span><br><span class="line">	    img = self.video_player.current_frame</span><br><span class="line">	    img.save(<span class="string">"./tmp/face.jpg"</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="PyQt4信号的另一种定义方法"><a href="#PyQt4信号的另一种定义方法" class="headerlink" title="PyQt4信号的另一种定义方法"></a>PyQt4信号的另一种定义方法</h2><h3 id="在子线程内打开新的窗口"><a href="#在子线程内打开新的窗口" class="headerlink" title="在子线程内打开新的窗口"></a>在子线程内打开新的窗口</h3><h4 id="定义信号，初始化的时候绑定，在子线程内调用"><a href="#定义信号，初始化的时候绑定，在子线程内调用" class="headerlink" title="定义信号，初始化的时候绑定，在子线程内调用"></a>定义信号，初始化的时候绑定，在子线程内调用</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainWindow</span><span class="params">(QtGui.QMainWindow)</span>:</span></span><br><span class="line">    <span class="string">'''程序主窗口'''</span></span><br><span class="line">    <span class="comment">#自定义的信号一定要作为类的成员变量</span></span><br><span class="line">    record_window_signal = QtCore.pyqtSignal()</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="comment">#... other code</span></span><br><span class="line">        self.record_window_signal.connect(self.showRecordWindow)</span><br><span class="line">        self.history_window_signal.connect(self.showHistoryWindow)</span><br><span class="line">		<span class="comment">#这里直接调用启动一个线程</span></span><br><span class="line">		thread = threading(tearget=self.backgroundWork)</span><br><span class="line">		thread.start()</span><br><span class="line">	</span><br><span class="line">	<span class="comment">#一个函数，做后台工作</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">backgroundWork</span><span class="params">(self)</span>:</span></span><br><span class="line">		<span class="comment">#...做一些后台工作，比如人脸识别</span></span><br><span class="line">		<span class="comment">#需要打开新的窗口的时候，触发这个信号即可</span></span><br><span class="line">		self.record_window_signal.emit()</span><br><span class="line"></span><br><span class="line">	<span class="comment">#自定义的信号被触发时打开一个自定义的Dialog</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">showRecordWindow</span><span class="params">(self)</span>:</span></span><br><span class="line">		<span class="comment">#CSInfoWindow是一个自定义的Didlog</span></span><br><span class="line">        self.add_dialog = CSInfoWindow()</span><br><span class="line">        self.add_dialog.exec_()</span><br></pre></td></tr></table></figure>
+<h2 id="人脸检测和比对"><a href="#人脸检测和比对" class="headerlink" title="人脸检测和比对"></a>人脸检测和比对</h2><h3 id="使用face-recognition检测图片内有没有人脸"><a href="#使用face-recognition检测图片内有没有人脸" class="headerlink" title="使用face_recognition检测图片内有没有人脸"></a>使用face_recognition检测图片内有没有人脸</h3><p>在进行人脸识别的时候，首先要从图片内找到人脸，有时候图片内根本没有人脸，有时候由很多张脸，都需要进行判断</p>
+<h4 id="安装face-recognition模块"><a href="#安装face-recognition模块" class="headerlink" title="安装face_recognition模块"></a>安装face_recognition模块</h4><ul>
+<li><p>安装依赖<br>  cmake 负责编译dlib <code>sudo apt install cmake</code><br>  libboost dlib的依赖 <code>sudo apt install libboost1.61-dev</code><br>  dlib 机器学习类库 <code>sudo apt install libdlib-dev</code>    </p>
+</li>
+<li><p>安装模块<br>  pil python的图像处理模块 <code>pip install pillow</code><br>  numpy 机器学习核心模块，无需多言 <code>pip install numpy face_recognition</code></p>
+</li>
+</ul>
+<h4 id="使用face-recognition检测照片内的人脸"><a href="#使用face-recognition检测照片内的人脸" class="headerlink" title="使用face_recognition检测照片内的人脸"></a>使用face_recognition检测照片内的人脸</h4><p>主要是一些API的使用，后台的方法都在dlib中实现，python只是调用而已<br>上一张效果图：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/78834-fccdb0d6dae9e02d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>这张图片直接检测出来，两个人脸！！！ 但是，其实我们只需要一张人脸。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#face_locations 就是对一张照片中人脸的定义，本质上是一个数组</span></span><br><span class="line">face_locations = face_recognition.face_locations(image)</span><br><span class="line"><span class="comment">#如果有多张人脸，则不作处理，因为不符合我们的使用场景</span></span><br><span class="line"><span class="keyword">if</span> len(face_locations) &gt; <span class="number">1</span>:</span><br><span class="line">    <span class="keyword">print</span> <span class="string">u"检测出了多张人脸，请确保镜头中只有一个人"</span></span><br><span class="line"><span class="comment">#如果没有任何人脸，也不做处理</span></span><br><span class="line"><span class="keyword">if</span> len(face_locations) == <span class="number">0</span>:</span><br><span class="line">    <span class="keyword">print</span> <span class="string">u"没有检测出来人脸，请重新识别"</span></span><br><span class="line"><span class="comment">#有且只有一张人脸的时候才开始进行人脸的定位</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">	<span class="comment">#face_locations[0]就是惟一的一张人脸</span></span><br><span class="line">    top, right, bottom, left = face_locations[<span class="number">0</span>]</span><br><span class="line">    <span class="comment">#按照人脸的尺寸，裁剪出来人脸</span></span><br><span class="line">    face_image = image[top:bottom, left:right]</span><br><span class="line">    pil_image = Image.fromarray(face_image)</span><br><span class="line">    <span class="comment">#显示截取出来的人脸</span></span><br><span class="line">    pil_image.show()</span><br><span class="line">    <span class="keyword">print</span> <span class="string">u"人脸检测成功"</span></span><br><span class="line">    filename = FACE_DIR + str(datetime.now()) + <span class="string">".jpg"</span></span><br><span class="line">    image = Image.fromarray(image)</span><br><span class="line">    image.save(filename)</span><br></pre></td></tr></table></figure>
+<h4 id="使用face-recognition进行人脸的比对"><a href="#使用face-recognition进行人脸的比对" class="headerlink" title="使用face_recognition进行人脸的比对"></a>使用face_recognition进行人脸的比对</h4><p>在人员数据库中存储了很多的人脸，当用户刷脸之后，要对人脸进行比对，确定用户身份。<br>人脸比对的API：</p>
+<p><code>face_recognition.api.compare_faces(known_face_encodings, face_encoding_to_check, tolerance=0.6)</code></p>
+<blockquote>
+<p>Compare a list of face encodings against a candidate encoding to see if they match.<br>Parameters:<br>    <code>known_face_encodings</code> – A list of known face encodings<br>    <code>face_encoding_to_check</code> – A single face encoding to compare against the list<br>    <code>tolerance</code>– How much distance between faces to consider it a match. Lower is more strict. 0.6 is typical best performance.<br>Returns:<br>A list of True/False values indicating which known_face_encodings match the face encoding to check</p>
+</blockquote>
+<ul>
+<li>参数1:  需要数据库内的所有人脸数据组成的数组（<code>know_face_encodings</code>）</li>
+<li>参数2:  需要未知人脸的数据（矩阵）： (<code>face_encoding_to_check</code>)</li>
+<li><p>严格程度： <code>tolerance</code> 严格程度从0.1 到1 越来越宽松，数值设置越大约有可能识别错误，数据太小由难以识别到。</p>
+<p>具体实现的代码：</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">recognite</span><span class="params">(unknow_img)</span>:</span></span><br><span class="line">	<span class="comment">#传入一张未知图片的编码，转换成矩阵</span></span><br><span class="line">    unknow_face_encoding = face_recognition.face_encodings(unknow_img)[<span class="number">0</span>]</span><br><span class="line">    know_faces = []</span><br><span class="line">    know_labels = []</span><br><span class="line">    <span class="comment"># 从本地的文件夹内加载所有已经存在的人脸并转为矩阵，放在一个数组内</span></span><br><span class="line">    <span class="keyword">for</span> filename <span class="keyword">in</span> os.listdir(FACE_DIR):</span><br><span class="line">        path = os.path.join(FACE_DIR,filename)</span><br><span class="line">        image = face_recognition.load_image_file(path)</span><br><span class="line">        know_face_encoding = face_recognition.face_encodings(image)[<span class="number">0</span>]</span><br><span class="line">        know_faces.append(know_face_encoding)</span><br><span class="line">        know_labels.append(filename)</span><br><span class="line">    <span class="comment"># 进行人脸的比对，这里精准度设置为0.4 具体需要根据摄像头的分辨率 拍摄距离等进行调试</span></span><br><span class="line">    result = face_recognition.compare_faces(know_faces, unknow_face_encoding, tolerance=<span class="number">0.4</span>)</span><br><span class="line">    <span class="comment"># 返回检测的结果级和对应的标签（姓名或者其他唯一性标识）</span></span><br><span class="line">    <span class="keyword">return</span> result, know_labels</span><br></pre></td></tr></table></figure>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><h3 id="接到任务的第一反映"><a href="#接到任务的第一反映" class="headerlink" title="接到任务的第一反映"></a>接到任务的第一反映</h3><p>在刚开始接到这个任务的时候，其实是很震惊的，因为作为机器学期或者人工智能的内行人来讲，我很清楚人脸识别意味着什么。（….意味着算法，预测模型，训练模型，计算机图形学），总之这就是一个经典的课题，要从头实现绝非一个人一年两年就能出成果的。但是好在前人有很多经验！</p>
+<h3 id="最初的计划"><a href="#最初的计划" class="headerlink" title="最初的计划"></a>最初的计划</h3><p>额！最初的想法是自己实现人脸比对的算法， 因为之前使用knn算法随手写数字进行过识别，是一个典型的监督学分类案例，具体的方法就是将图片转换为矩阵，再对矩阵进行归一化，使用欧式距离公式来计算出来n维空间中这些点的距离，然后根据距离它最近的几个点进行概率判断，从而进行分类。但是人脸识别这样做根本不可行，人脸识别中既有回归分析又有分类，还是很棘手的。</p>
+<h3 id="第三方SDK"><a href="#第三方SDK" class="headerlink" title="第三方SDK"></a>第三方SDK</h3><p>经过查阅资料发现，使用第三方SDK还是比较靠谱的，目前主流的由opencv和dlib，这里选择了dlib，因为dlib的面部识别的密度比较大，所以精准度会高一点，但是项目中还是使用了Opencv来进行视频流的获取。</p>
+<h3 id="最终结果"><a href="#最终结果" class="headerlink" title="最终结果"></a>最终结果</h3><p>本来打算在windows环境下使用c#实现，但是考虑到开发效率， 决定还是用python开发比较靠谱。但在此之前并没有python GUI程序的开发经验，所以从头学习了python的QT开发， 开发环境选择在linux下，但是QT跨平台，今后也可在windows平台下部署，不过一想到windows下复杂的软件和类库安装过程，我就呵呵了，决定运行环境依旧在Linux下，避免电脑中毒导致系统崩溃（这个以前有血的教训，所以强烈建议使用Linux来运行重要系统）。<br>经过三天两夜的开发， 从零开始实现了人脸识别的程序， 测试之后还比较稳定，关于精准度的问题，这个还是需要根据实际环境来调试，并且也需要在拍照的时候做好用户引导。因为，天知道以后有多少人会被录在数据库内，而且精准度又不能太低，所以必须做好使用人员的培训，确保不会认错人，或者认不出来人。 如果单位的人比较少，大可以慢慢采集原始数据，正脸，侧脸，各种角度表情都可以存在数据库进行比对，但是这个程序要检测的对象是随机的，不是固定的那么几个人，但从目前测试的结果来看，正常使用，距离摄像头2到4米的距离拍照，基本上不会再误报，不遮挡眼睛，不吐舌头，微笑，大笑都可以正确识别。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2018/06/27/基于面部识别的日志系统的设计与实现/">基于面部识别的日志系统的设计与实现</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">Andy</a></p>
+        <p><span>发布时间:</span>2018-06-27, 21:30:23</p>
+        <p><span>最后更新:</span>2018-06-27, 21:44:06</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2018/06/27/基于面部识别的日志系统的设计与实现/" title="基于面部识别的日志系统的设计与实现">http://mazingan.github.io/2018/06/27/基于面部识别的日志系统的设计与实现/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://mazingan.github.io/2018/06/27/基于面部识别的日志系统的设计与实现/　　作者: Andy" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2018/06/27/关于Django的CSRF和跨域访问机制/">
+                    关于Django的CSRF和跨域访问机制
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2018/06/27/直播平台概述和直播服务器架设-md/">
+                    直播平台概述和直播服务器架设.md
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#需求与设计"><span class="toc-number">1.</span> <span class="toc-text">需求与设计</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#核心技术"><span class="toc-number">1.1.</span> <span class="toc-text">核心技术</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数据存储"><span class="toc-number">1.2.</span> <span class="toc-text">数据存储</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#前端界面"><span class="toc-number">1.3.</span> <span class="toc-text">前端界面</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#显示监控画面"><span class="toc-number">2.</span> <span class="toc-text">显示监控画面</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#opencv捕获摄像机视频流"><span class="toc-number">2.1.</span> <span class="toc-text">opencv捕获摄像机视频流</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PyQt4子线程控制UI线程更新"><span class="toc-number">3.</span> <span class="toc-text">PyQt4子线程控制UI线程更新</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#使用场景一：子线程获取视频流的frame，主线程更新frame"><span class="toc-number">3.0.1.</span> <span class="toc-text">使用场景一：子线程获取视频流的frame，主线程更新frame</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#使用场景二：视频的截屏，在子线程里截屏并保存到本地"><span class="toc-number">3.0.2.</span> <span class="toc-text">使用场景二：视频的截屏，在子线程里截屏并保存到本地</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#使用Python原声的threading-thread创建线程，只想简单工作"><span class="toc-number">3.0.2.1.</span> <span class="toc-text">使用Python原声的threading.thread创建线程，只想简单工作</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PyQt4信号的另一种定义方法"><span class="toc-number">4.</span> <span class="toc-text">PyQt4信号的另一种定义方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#在子线程内打开新的窗口"><span class="toc-number">4.1.</span> <span class="toc-text">在子线程内打开新的窗口</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#定义信号，初始化的时候绑定，在子线程内调用"><span class="toc-number">4.1.1.</span> <span class="toc-text">定义信号，初始化的时候绑定，在子线程内调用</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#人脸检测和比对"><span class="toc-number">5.</span> <span class="toc-text">人脸检测和比对</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#使用face-recognition检测图片内有没有人脸"><span class="toc-number">5.1.</span> <span class="toc-text">使用face_recognition检测图片内有没有人脸</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#安装face-recognition模块"><span class="toc-number">5.1.1.</span> <span class="toc-text">安装face_recognition模块</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#使用face-recognition检测照片内的人脸"><span class="toc-number">5.1.2.</span> <span class="toc-text">使用face_recognition检测照片内的人脸</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#使用face-recognition进行人脸的比对"><span class="toc-number">5.1.3.</span> <span class="toc-text">使用face_recognition进行人脸的比对</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">6.</span> <span class="toc-text">总结</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#接到任务的第一反映"><span class="toc-number">6.1.</span> <span class="toc-text">接到任务的第一反映</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#最初的计划"><span class="toc-number">6.2.</span> <span class="toc-text">最初的计划</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第三方SDK"><span class="toc-number">6.3.</span> <span class="toc-text">第三方SDK</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#最终结果"><span class="toc-number">6.4.</span> <span class="toc-text">最终结果</span></a></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"基于面部识别的日志系统的设计与实现　| Andy's Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2018/06/27/关于Django的CSRF和跨域访问机制/" title="上一篇: 关于Django的CSRF和跨域访问机制">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2018/06/27/直播平台概述和直播服务器架设-md/" title="下一篇: 直播平台概述和直播服务器架设.md">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/06/27/python语言特性之引用/">python语言特性之引用</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/27/使用namedtupe构建没有方法的对象/">使用namedtupe构建没有方法的对象</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/27/关于Django的CSRF和跨域访问机制/">关于Django的CSRF和跨域访问机制</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/27/基于面部识别的日志系统的设计与实现/">基于面部识别的日志系统的设计与实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/27/直播平台概述和直播服务器架设-md/">直播平台概述和直播服务器架设.md</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/27/读《岛上书店》和《无声告白》有感/">读《岛上书店》和《无声告白》有感</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2018 Andy
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+    <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

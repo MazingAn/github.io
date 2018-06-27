@@ -15,14 +15,18 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="about">
-<meta property="og:url" content="http://mazingan.github.io/about/index.html">
+<meta name="description" content="The CSRF middleware and template tag provides easy-to-use protection against Cross Site Request Forgeries. This type of attack occurs when a malicious website contains a link, a form button or some J">
+<meta name="keywords" content="django,跨域访问">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于Django的CSRF和跨域访问机制">
+<meta property="og:url" content="http://mazingan.github.io/2018/06/27/关于Django的CSRF和跨域访问机制/index.html">
 <meta property="og:site_name" content="Andy&#39;s Blog">
+<meta property="og:description" content="The CSRF middleware and template tag provides easy-to-use protection against Cross Site Request Forgeries. This type of attack occurs when a malicious website contains a link, a form button or some J">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-27T12:00:15.288Z">
+<meta property="og:updated_time" content="2018-06-27T13:58:37.985Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="about">
+<meta name="twitter:title" content="关于Django的CSRF和跨域访问机制">
+<meta name="twitter:description" content="The CSRF middleware and template tag provides easy-to-use protection against Cross Site Request Forgeries. This type of attack occurs when a malicious website contains a link, a form button or some J">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -54,7 +58,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>about | Andy&#39;s Blog</title>
+<title>关于Django的CSRF和跨域访问机制 | Andy&#39;s Blog</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -64,7 +68,7 @@
         fancybox: true,
         animate: true,
         isHome: false,
-        isPost: false,
+        isPost: true,
         isArchive: false,
         isTag: false,
         isCategory: false,
@@ -261,11 +265,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="page-" class="article article-type-page" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-关于Django的CSRF和跨域访问机制" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/about/index.html" class="article-date">
-      <time datetime="2018-06-27T12:00:15.000Z" itemprop="datePublished">2018-06-27</time>
+      <a href="/2018/06/27/关于Django的CSRF和跨域访问机制/" class="article-date">
+      <time datetime="2018-06-27T13:49:13.000Z" itemprop="datePublished">2018-06-27</time>
 </a>
 
 
@@ -280,7 +284,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      about
+      关于Django的CSRF和跨域访问机制
     </h1>
   
 
@@ -290,6 +294,10 @@
         
 
         
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/django/">django</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/跨域访问/">跨域访问</a></li></ul>
+    </div>
+
         <div class="clearfix"></div>
       </div>
       
@@ -297,36 +305,86 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <style>
-    .article-meta { display: none; }
-    #container .article .article-title { padding-right: 0; }
-    .article-header {
-        padding: 0;
-        padding-top: 26px;
-        border-left: none;
-        text-align: center;
-    }
-    .article-header:hover { border-left: none; }
-    .article-title { font-size: 1.6em }
-    .article-entry hr { margin: 0;}
-    .article-meta,
-    #container .article-info-post.article-info { display: none;}
-    #container .article .article-title { padding: 0; }
-</style>
+        <blockquote>
+<p>The CSRF middleware and template tag provides easy-to-use protection against Cross Site Request Forgeries. This type of attack occurs when a malicious website contains a link, a form button or some JavaScript that is intended to perform some action on your website, using the credentials of a logged-in user who visits the malicious site in their browser. A related type of attack, ‘login CSRF’, where an attacking site tricks a user’s browser into logging into a site with someone else’s credentials, is also covered.<br>The first defense against CSRF attacks is to ensure that GET requests (and other ‘safe’ methods, as defined by RFC 7231#section-4.2.1) are side effect free. Requests via ‘unsafe’ methods, such as POST, PUT, and DELETE, can then be protected by following the steps below.</p>
+</blockquote>
+<a id="more"></a>
+<p>以上描述来自django官方文档种对CSRF中间件的描述，简单的来说，就是一个页面发出的请求必须来自于这个站点。拿银行来说，银行转账的url可能是这样<code>www.xxbank.com/trans</code>，POST参数为<code>target_id</code>,<code>money</code>;如果现在有一个钓鱼网站诱骗用户输入了银行账户和密码，然后在隐藏表单内提交<code>target_id</code>和<code>money</code>那么钱就莫名其妙的被转走了。这也就是所谓的CSRF。</p>
+<p>django为了解决这个问题，在<code>POST</code>,<code>PUT</code>,<code>DELETE</code>等可以修改数据的方法设置了csrf_token,当用户第一次访问网站的时候，服务端会产生一个随机的安全码作为token，并返回给客户端， 客户端会将token存在cookies里，在进行POST提交的时候，则必须带上这个token，以便于服务器验证。总的来说就是给客户端发令牌， 客户端带着令牌才可以执行操作，否则就返回403.</p>
+<p>在前端的form表单里加上csrf_token,模板会默认在表单内增加一个隐藏项（命名为csrfmiddlewaretoken）。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;form action=<span class="string">"/login"</span>&gt;</span><br><span class="line">&#123;%csrf_token%&#125;</span><br><span class="line">    &lt;input type=<span class="string">'text'</span> name=<span class="string">'username'</span>/&gt;</span><br><span class="line">    &lt;input type=<span class="string">'password'</span> name=<span class="string">'password'</span>/&gt;</span><br><span class="line">    &lt;button type=<span class="string">'submit'</span>/&gt;</span><br><span class="line">&lt;/form&gt;</span><br></pre></td></tr></table></figure>
+<p>对于ajax则需要手动去设置参数，在进行数据提交之前，在请求头内加上页面之前发送过来的token。django官方提供了从cookie里获得csrf-token的方法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//ajax设置csrf_token</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">csrfSafeMethod</span>(<span class="params">method</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// these HTTP methowds do not require CSRF protection</span></span><br><span class="line">    <span class="keyword">return</span> (<span class="regexp">/^(GET|HEAD|OPTIONS|TRACE)$/</span>.test(method));</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getCookie</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> cookieValue = <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">document</span>.cookie &amp;&amp; <span class="built_in">document</span>.cookie !== <span class="string">''</span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> cookies = <span class="built_in">document</span>.cookie.split(<span class="string">';'</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; cookies.length; i++) &#123;</span><br><span class="line">            <span class="keyword">var</span> cookie = jQuery.trim(cookies[i]);</span><br><span class="line">            <span class="comment">// Does this cookie s begin with the name we want?</span></span><br><span class="line">            <span class="keyword">if</span> (cookie.substring(<span class="number">0</span>, name.length + <span class="number">1</span>) === (name + <span class="string">'='</span>)) &#123;</span><br><span class="line">                cookieValue = <span class="built_in">decodeURIComponent</span>(cookie.substring(name.length + <span class="number">1</span>));</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> cookieValue;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> csrf_token = getCookie(<span class="string">'csrf_token'</span>);</span><br><span class="line">$.ajaxSetup(&#123;</span><br><span class="line">    beforeSend: <span class="function"><span class="keyword">function</span>(<span class="params">xhr, settings</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!csrfSafeMethod(settings.type) &amp;&amp; !<span class="keyword">this</span>.crossDomain) &#123;</span><br><span class="line">            xhr.setRequestHeader(<span class="string">"X-CSRFToken"</span>, csrf_token);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>执行上述操作之后，在进行正常的ajax提交即可。</p>
+<p>有时候部分浏览器可能拿不到token，这个时候需要使用到装饰器<code>ensure_csrf_cookie</code>.用来装饰需要使用token的view，确保token在第一次访问时被传递到客户端。</p>
+<p>同时，还可以使用 csrf_protecte或csrf_exempt 强制要求一个view使用或不使用CSRF中间件。</p>
+<p>默认情况下，token会被放在cookies里，但也可放在session内，可通过settings配置文件修改，但匿名用户是没有session的。</p>
 
-
-          
-        
       
     </div>
     
   </div>
   
     
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2018/06/27/关于Django的CSRF和跨域访问机制/">关于Django的CSRF和跨域访问机制</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">Andy</a></p>
+        <p><span>发布时间:</span>2018-06-27, 21:49:13</p>
+        <p><span>最后更新:</span>2018-06-27, 21:58:37</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2018/06/27/关于Django的CSRF和跨域访问机制/" title="关于Django的CSRF和跨域访问机制">http://mazingan.github.io/2018/06/27/关于Django的CSRF和跨域访问机制/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://mazingan.github.io/2018/06/27/关于Django的CSRF和跨域访问机制/　　作者: Andy" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
 
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2018/06/27/使用namedtupe构建没有方法的对象/">
+                    使用namedtupe构建没有方法的对象
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2018/06/27/基于面部识别的日志系统的设计与实现/">
+                    基于面部识别的日志系统的设计与实现
+                </a>
+            </div>
+        
+    </nav>
 
   
 </article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
 
 
 
@@ -344,7 +402,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"about　| Andy's Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"关于Django的CSRF和跨域访问机制　| Andy's Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -359,6 +417,26 @@
 
     
 
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2018/06/27/使用namedtupe构建没有方法的对象/" title="上一篇: 使用namedtupe构建没有方法的对象">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2018/06/27/基于面部识别的日志系统的设计与实现/" title="下一篇: 基于面部识别的日志系统的设计与实现">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/06/27/python语言特性之引用/">python语言特性之引用</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/27/使用namedtupe构建没有方法的对象/">使用namedtupe构建没有方法的对象</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/27/关于Django的CSRF和跨域访问机制/">关于Django的CSRF和跨域访问机制</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/27/基于面部识别的日志系统的设计与实现/">基于面部识别的日志系统的设计与实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/27/直播平台概述和直播服务器架设-md/">直播平台概述和直播服务器架设.md</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/27/读《岛上书店》和《无声告白》有感/">读《岛上书店》和《无声告白》有感</a></li></ul>
 
 
 

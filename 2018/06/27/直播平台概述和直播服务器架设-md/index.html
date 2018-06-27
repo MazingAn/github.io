@@ -15,18 +15,22 @@
 
 
 
-<meta name="description" content="将《岛上书店》与《无声告白》的读后感放在一起来写并不是因为这两本书有什么必然的联系，非要找出来那么一点联系的话，那么这两本书都关乎爱情、亲情和生活，也都有那么一点点命运的意味。似乎大部分小说也无非这几个主题吧。">
-<meta name="keywords" content="-读书">
+<meta name="description" content="不会做直播还混什么互联网2016年国内各种直播应用如雨后春笋一般涌现出来，各大主打云服务的国内互联网巨头纷纷推出了自己的视频直播平台的解决方案，比较优秀的有七牛, 阿里的大视频解决方案,网易的云视频，当然腾讯也不甘落后，推出了类似的视频云。 事实上，网络直播由来已久，但之所以会在2016年一下子火起来，我觉得一是短视频社区的火爆带动了整个视频行业，促成了网络直播的流行。再者，大部分人通过早期的微信">
+<meta name="keywords" content="流媒体,nginx-rtmp,网络直播">
 <meta property="og:type" content="article">
-<meta property="og:title" content="读《岛上书店》和《无声告白》有感">
-<meta property="og:url" content="http://mazingan.github.io/2018/06/27/读《岛上书店》和《无声告白》有感/index.html">
+<meta property="og:title" content="直播平台概述和直播服务器架设.md">
+<meta property="og:url" content="http://mazingan.github.io/2018/06/27/直播平台概述和直播服务器架设-md/index.html">
 <meta property="og:site_name" content="Andy&#39;s Blog">
-<meta property="og:description" content="将《岛上书店》与《无声告白》的读后感放在一起来写并不是因为这两本书有什么必然的联系，非要找出来那么一点联系的话，那么这两本书都关乎爱情、亲情和生活，也都有那么一点点命运的意味。似乎大部分小说也无非这几个主题吧。">
+<meta property="og:description" content="不会做直播还混什么互联网2016年国内各种直播应用如雨后春笋一般涌现出来，各大主打云服务的国内互联网巨头纷纷推出了自己的视频直播平台的解决方案，比较优秀的有七牛, 阿里的大视频解决方案,网易的云视频，当然腾讯也不甘落后，推出了类似的视频云。 事实上，网络直播由来已久，但之所以会在2016年一下子火起来，我觉得一是短视频社区的火爆带动了整个视频行业，促成了网络直播的流行。再者，大部分人通过早期的微信">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-27T13:22:08.268Z">
+<meta property="og:image" content="http://mazingan.github.io/2018/06/27/直播平台概述和直播服务器架设-md/1501506078827.png">
+<meta property="og:image" content="http://mazingan.github.io/2018/06/27/直播平台概述和直播服务器架设-md/1501507101583.png">
+<meta property="og:image" content="http://mazingan.github.io/2018/06/27/直播平台概述和直播服务器架设-md/1501510359019.png">
+<meta property="og:updated_time" content="2018-06-27T13:27:41.851Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="读《岛上书店》和《无声告白》有感">
-<meta name="twitter:description" content="将《岛上书店》与《无声告白》的读后感放在一起来写并不是因为这两本书有什么必然的联系，非要找出来那么一点联系的话，那么这两本书都关乎爱情、亲情和生活，也都有那么一点点命运的意味。似乎大部分小说也无非这几个主题吧。">
+<meta name="twitter:title" content="直播平台概述和直播服务器架设.md">
+<meta name="twitter:description" content="不会做直播还混什么互联网2016年国内各种直播应用如雨后春笋一般涌现出来，各大主打云服务的国内互联网巨头纷纷推出了自己的视频直播平台的解决方案，比较优秀的有七牛, 阿里的大视频解决方案,网易的云视频，当然腾讯也不甘落后，推出了类似的视频云。 事实上，网络直播由来已久，但之所以会在2016年一下子火起来，我觉得一是短视频社区的火爆带动了整个视频行业，促成了网络直播的流行。再者，大部分人通过早期的微信">
+<meta name="twitter:image" content="http://mazingan.github.io/2018/06/27/直播平台概述和直播服务器架设-md/1501506078827.png">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -58,7 +62,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>读《岛上书店》和《无声告白》有感 | Andy&#39;s Blog</title>
+<title>直播平台概述和直播服务器架设.md | Andy&#39;s Blog</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -265,11 +269,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-读《岛上书店》和《无声告白》有感" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-直播平台概述和直播服务器架设-md" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/06/27/读《岛上书店》和《无声告白》有感/" class="article-date">
-      <time datetime="2018-06-27T12:41:49.000Z" itemprop="datePublished">2018-06-27</time>
+      <a href="/2018/06/27/直播平台概述和直播服务器架设-md/" class="article-date">
+      <time datetime="2018-06-27T13:25:46.000Z" itemprop="datePublished">2018-06-27</time>
 </a>
 
 
@@ -284,7 +288,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      读《岛上书店》和《无声告白》有感
+      直播平台概述和直播服务器架设.md
     </h1>
   
 
@@ -295,7 +299,7 @@
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/读书/">-读书</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx-rtmp/">nginx-rtmp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/流媒体/">流媒体</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/网络直播/">网络直播</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -305,17 +309,64 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>将《岛上书店》与《无声告白》的读后感放在一起来写并不是因为这两本书有什么必然的联系，非要找出来那么一点联系的话，那么这两本书都关乎爱情、亲情和生活，也都有那么一点点命运的意味。似乎大部分小说也无非这几个主题吧。<br><a id="more"></a></p>
-<h3 id="《岛上书店》-——因为爱，人们彼此改变"><a href="#《岛上书店》-——因为爱，人们彼此改变" class="headerlink" title="《岛上书店》 ——因为爱，人们彼此改变"></a>《岛上书店》 ——因为爱，人们彼此改变</h3><p>《岛上书店》讲述了中年丧偶的主人公A.J.费克里在一座交通闭塞的小岛上经营一家书店的故事，有那么一点理想主义的A.J在妻子离世的打击之后茫然的经营着随时都可能倒闭的书店,于此同时还丢掉了自己视为后路的价值不菲的一本书（文物）。好在主人公痴迷于阅读（却切的来讲是短篇和中篇小说），并每日在不同的故事中醉生梦死，寻找并怀念已经逝去的爱妻，直到碰到养女玛雅，玛雅改变了A.J的人生轨迹，成为了他和小姨子伊斯梅、警长兰比亚斯以及出版社女业务员阿米莉娅之间的纽带，并因为一本书和出版社女业务员阿米莉娅相恋并结婚。从始至终，A.J并不知道玛雅其实是伊梅斯的作家丈夫与一个可怜的女粉丝的私生女，而梅伊斯得知真相后与丈夫在争执中遭遇意外并失去了作家丈夫，最终    A.J也因为癌症去世，阿米莉娅带着玛雅离开了小岛，兰比亚斯与伊梅斯最终结合并接手了岛上书店。</p>
-<p>故事的结局尽管并不圆满，但相对于开头，好歹主人公A.J直到他死去也没有一直孤独下去。很多人评论，说是阅读改变了小岛上的几个人物并将他们紧紧联系。而我觉得，改变大家的不仅仅是阅读，更是因为爱。当A.J被现实困在闭塞的小岛上，心灵同时也成了一座孤岛。玛雅的出现让A.J重新体会到了人间的爱，同时也改变了A.J的书单，A.J也正是因为新的阅读感悟才和女主人公阿米莉娅走到了一起，同时也在阿米莉娅的影响下变得不再像往常那样固执与偏激，书店的生意也稍有起色。有了玛雅与阿米莉娅，A.J的书单便不断地改变，从最初的《呆在的羔羊》到《穿着夏裙的女孩》再到《当我们谈论爱情是时我们在谈论什么》，因为爱，A.J的书单在不断地变化，也因为书，A.J对爱的体验也在不断的改变，并从此远离孤独，直到死去。</p>
-<p>不管怎样，我都不觉得这是一部悲剧。正如书中所说“生活中每一桩糟糕事，几乎都是时机不当的结果；每件好事，都是时机恰到好处的结果”。不同的阶段阅读相同的书籍都会有不同的体验，生活更是如此。不管多么艰难，都不要将自己陷入孤岛，要去爱，不管是付出或是收获，爱总能改变一些事。不是吗？</p>
-<h3 id="《无声告白》-——我们终此一生，就是要摆脱他人的期待，成为真正的自己"><a href="#《无声告白》-——我们终此一生，就是要摆脱他人的期待，成为真正的自己" class="headerlink" title="《无声告白》 ——我们终此一生，就是要摆脱他人的期待，成为真正的自己"></a>《无声告白》 ——我们终此一生，就是要摆脱他人的期待，成为真正的自己</h3><p>莉迪亚死了，可他们还不知道。<br>莉迪亚是家中老二，李先生和李太太的掌上明珠，她遗传了母亲的蓝眼睛和父亲的黑头发。父母深信，莉迪亚一定能实现他们无法实现的梦想。但他们从未发现莉迪亚一直以来都没有喜欢过父母强加在她身上的梦想，即使莉迪亚已经死掉。</p>
-<p>《无声告白》的精彩之处正是在于其深刻的描述李先生一家不同时期的人物心理。在美国长大的华裔詹姆斯从小深受种族主义毒害，一生的梦想便是彻底融入美国社会。在得到妻子玛里琳的爱慕之后，似乎一下子从种族主义的牢笼中解放了出来，娶了正宗的美国妻子，成为正派的美国教授，在美国安身立命，育儿成家。而玛里琳则因为爱情暂时放弃了自己要成为女医生的理想，最终选择安心做一名家庭主妇，但在这之前玛里琳还经历了一次堂吉诃德式的离家出走，虽然最终以失败告终，但也为故事开头的悲剧埋下了祸根。</p>
-<p>事实上，玛里琳尽管离家出走重回校园也并没有成为女医生，实现自我。同时也让詹姆斯认识到了自己事实上自己并没有融入社群，实现自我。于是，父母的梦想被强加在了老二莉迪亚的身上。不幸的是莉迪亚因为受到母亲离家出走的影响，决定配合并取悦父母。学习自己并不喜欢的生物和物理，接受自己并不喜欢的生日礼物——母亲送的医学书籍和父亲送的社交书籍，并逐渐学会用并不真实的微笑来欺瞒父母。直到这个从10岁长到16岁的女孩，这个高一年级上着高二物理课，旁听大学生物课的女孩突然溺死离家不远的的湖中，父母仍然百思不得其解。事实上玛里琳并未自杀，也并非被隔壁的坏小子带坏。而是在即将失去一直理解自己的哥哥以及了解了邻居“坏小子”的秘密之后，决心摆脱父母的期待，决心做自己的仪式上（偷跑出家里划船来到湖心）不辛意外死亡。</p>
-<p>因为爱，玛里琳放弃自己的女权主义理想嫁给了华裔男孩詹姆斯，也因为自己的女权主义理想玛里琳抛弃丈夫孩子离家出走；因为爱，詹姆斯感觉自己摆脱了种族主义的阴影，也是受种族主义的阴影詹姆斯在女儿下葬的那一天和同时亚裔的年轻助教滚了床单；因为爱，莉迪亚决心取悦父母，接收他们女权主义和种族助理带给自己的枷锁，但也因为这两个主义莉迪亚在反抗宣告仪式中意外溺亡。玛里琳总是关注着莉迪亚的成绩，詹姆斯总是关注着莉迪亚交到了到少朋友，从来没有人关心莉迪亚真正想要什么。最悲哀的是，这一家人似乎从未幸福过。莉迪亚死前，老大内斯正在因为收到哈弗的通知书而庆幸自己马上要摆脱这个家庭，老三汉娜，一个小女孩则在长期被忽视的环境中变得胆小、安静甚至拥有了与其年龄不符的诡异心理。总之，这个故事从未让人感觉轻松，因为变态的爱，这一家人似乎从未幸福过。</p>
-<p>书中的个最后一章，在莉迪亚即将死去的某一个晚上，当汉娜因为偷偷拿走莉迪亚的项链时，莉迪亚完全失控，差点用项链勒死了妹妹。汉娜从莉迪亚眼中看到的不失愤怒，而是焦虑。汉娜将永远记住姐姐所说的——“如果你不愿意笑，就别笑。”</p>
-<p>我们终其一生，就是为了摆脱他人的期待，成为真正的自己。但是期待不就是因为爱吗？</p>
-<h3 id="爱无罪-但不要以爱之名"><a href="#爱无罪-但不要以爱之名" class="headerlink" title="爱无罪 但不要以爱之名"></a>爱无罪 但不要以爱之名</h3><p>《岛上书店》与《无声告白》时两本截然不同的书。<br>爱无罪，人们因爱改变。但请一定注意那些以爱之名的伤害。</p>
+        <h3 id="不会做直播还混什么互联网"><a href="#不会做直播还混什么互联网" class="headerlink" title="不会做直播还混什么互联网"></a>不会做直播还混什么互联网</h3><p>2016年国内各种直播应用如雨后春笋一般涌现出来，各大主打云服务的国内互联网巨头纷纷推出了自己的视频直播平台的解决方案，比较优秀的有<a href="http://www.qiniu.com" target="_blank" rel="noopener">七牛</a>, 阿里的<a href="https://www.aliyun.com/solution/media" target="_blank" rel="noopener">大视频解决方案</a>,网易的<a href="https://vcloud.163.com/live" target="_blank" rel="noopener">云视频</a>，当然腾讯也不甘落后，推出了类似的<a href="https://www.qcloud.com/product/ilvb" target="_blank" rel="noopener">视频云</a>。</p>
+<p>事实上，网络直播由来已久，但之所以会在2016年一下子火起来，我觉得一是短视频社区的火爆带动了整个视频行业，促成了网络直播的流行。再者，大部分人通过早期的微信公众号，微博等自媒体媒介尝到了甜头，网络直播片天地自然也不能放过。最后各类mooc在中国大地遍地开花，教育行业对直播也有相当需求。最后，事实上对于直播，国内具有相当的技术积累。</p>
+<a id="more"></a>
+<h3 id="网络直播的技术构架"><a href="#网络直播的技术构架" class="headerlink" title="网络直播的技术构架"></a>网络直播的技术构架</h3><p>往简单地说直播就是在自己的设备上采集音视频流然后推送到远程服务器再有远程服务器分发到网络中的客户端。</p>
+<p><img src="./1501506078827.png" alt="@这可能是历史上最粗线条的直播构架图"></p>
+<p>看上去很简陋，但是单就直播这个功能来说，他确实就是这么工作的，但是为了让大家看到更加高清的画面同时又能最大限度的满足部分用户可怜的带宽，编码工作就成了视频直播的重点。其次，不同的硬件的编码方式也不同，存在各种兼容性问题。同时，视频取流的客户端也需要做各种各样的播放器来满足不同设备。最要命的还有服务器端的网络分发，怎么寻找最短的路径用最快的时间把视频分发出去?最后，还有视频延时怎么才能降到最低，音视频的同步，直播的录像和回看和其引出的存储问题，权限问题，内容审核，用户体验，用户之间的即时消息，礼物系统等等一系列问题的引出，最终导致了直播系统变得异常复杂，于是就有了下图：<br><img src="./1501507101583.png" alt="@一个功能上基本够用的直播系统"></p>
+<h3 id="书归正传，先来谈谈直播服务器"><a href="#书归正传，先来谈谈直播服务器" class="headerlink" title="书归正传，先来谈谈直播服务器"></a>书归正传，先来谈谈直播服务器</h3><p>目前比较主流的直播协议有以下几种：</p>
+<ul>
+<li>RTMP（延迟低，适合对实时性要求比较高的情况）</li>
+<li>FLV OVER HTTP（延迟比RTMP高一点，来疯之类在用)</li>
+<li>HLS（高延迟，至少9秒左右，适合游戏直播，Twich好像用这个）</li>
+</ul>
+<p>怎么选择协议是一个让人头疼的问题，RTMP是Adobe开发出来的一套私有协议，适用于flash player 在PC端用起来比较爽，但是到了移动端则需要自己单独开发播放器；HTTP-FLV，同样依赖于flash player延时排第二，同样不能原生支持移动端，但其本质上使用的是HTTP协议传输；HLS则可以原生支持手机端，不过，延时较大。</p>
+<p>最终，尽管Adobe已经正是声明将在2020年停止开发FLASH，但是这也并不影响我使用rtmp协议，谁让网络上rtmp的资料比较多呢。</p>
+<h3 id="RTMP服务器"><a href="#RTMP服务器" class="headerlink" title="RTMP服务器"></a>RTMP服务器</h3><p>目前主流的RTMP服务器又有下面这么几种（这是要逼死选择困难户啊）：<br>1.开源系统：</p>
+<ul>
+<li>Red5</li>
+<li>Live555</li>
+<li>RtmpD</li>
+<li>EasyDarwin</li>
+<li>FFServer<br>2.商用系统</li>
+<li>NTV Media Server G3</li>
+<li>Flash Media Server5</li>
+<li>Windows Media Server</li>
+</ul>
+<p>商用系统，额，基本上不用考虑了，像我这种个人开发者。。。<br>然后，开源系统也果断一个都没有选，最后选择了nginx-rtmp.因为我的直播系统并没有多么复杂，说是直播，实际上是想做一个导播台！</p>
+<h3 id="nginx-rtmp安装"><a href="#nginx-rtmp安装" class="headerlink" title="nginx-rtmp安装"></a>nginx-rtmp安装</h3><p>nginx-rtmp 事实上只是nginx的一个模块，而且并没有在nginx官方版本内集成，需要在安装nginx的时候同是编译这个模块进去。</p>
+<p>具体的安装方法，按照一般的套路，首先是下载，然后是编译和安装，最后是配置。</p>
+<p>首先，需要分别下载nginx服务器和对应的插件 nginx-rtmp-module.</p>
+<blockquote>
+<p><code>wget https://nginx.org/download/nginx-1.12.1.tar.gz</code><br><code>git clone git://github.com/arut/nginx-rtmp-module.git</code><br><code>tar xzf nginx-1.12.0.tar.gz</code><br><code>cd nginx-1.12.0</code></p>
+</blockquote>
+<p>然后，进行编译安装：</p>
+<blockquote>
+<p><code>sudo ./configure --with-http_ssl_module --add-module=../nginx-rtmp-module</code><br>    <code>sudo make</code><br>    <code>sudo make install</code></p>
+</blockquote>
+<p>至此，编译安装完成！家下来启动nginx服务器：</p>
+<blockquote>
+<p><code>sudo /usr/local/nginx/sbin/nginx</code></p>
+</blockquote>
+<p>设置nginx服务器的直播流</p>
+<blockquote>
+<p><code>sudo vi /usr/local/nginx/conf/nginx.conf</code></p>
+</blockquote>
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">error_log  logs/error.log debug;</span><br><span class="line">    </span><br><span class="line">events &#123;</span><br><span class="line">    worker_connections  <span class="number">1024</span>;</span><br><span class="line">&#125;</span><br><span class="line">http &#123;</span><br><span class="line">    include       mime.types;</span><br><span class="line">    default_type  application/octet-stream;</span><br><span class="line"></span><br><span class="line">    sendfile        on;</span><br><span class="line">    keepalive_timeout  <span class="number">65</span>;</span><br><span class="line"></span><br><span class="line">    server &#123;</span><br><span class="line">        listen       <span class="number">8080</span>;</span><br><span class="line">        server_name  localhost;</span><br><span class="line"></span><br><span class="line">        <span class="comment"># rtmp stat</span></span><br><span class="line">        location /stat &#123;</span><br><span class="line">            rtmp_stat all;</span><br><span class="line">            rtmp_stat_stylesheet stat.xsl;</span><br><span class="line">        &#125;</span><br><span class="line">        location /stat.xsl &#123;</span><br><span class="line">            <span class="comment"># you can move stat.xsl to a different location</span></span><br><span class="line">            root /usr/build/nginx-rtmp-<span class="keyword">module</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment"># rtmp control</span></span><br><span class="line">        location /control &#123;</span><br><span class="line">            rtmp_control all;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        error_page   <span class="number">500</span> <span class="number">502</span> <span class="number">503</span> <span class="number">504</span>  /<span class="number">50</span>x.html;</span><br><span class="line">        location = /<span class="number">50</span>x.html &#123;</span><br><span class="line">            root   html;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">rtmp &#123;</span><br><span class="line">    server &#123;</span><br><span class="line">        listen <span class="number">1935</span>;</span><br><span class="line">        ping <span class="number">30</span>s;</span><br><span class="line">        notify_method get;</span><br><span class="line"></span><br><span class="line">        application myapp &#123;</span><br><span class="line">            live on;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>设置完成之后，重启nginx服务器：</p>
+<blockquote>
+<p><code>sudo /usr/local/nginx/sbin/nginx -s stop</code><br><code>sudo /usr/local/nginx/sbin/nginx</code></p>
+</blockquote>
+<p>最后准备一个MP4文件进行测试：<br>使用ffmpeg推送视频文件到服务器：</p>
+<blockquote>
+<p><code>ffmpeg -re -i /var/Videos/test.mp4 -c copy -f flv rtmp://localhost/myapp/mystream</code></p>
+</blockquote>
+<p>最后再访问我们的直播地址：</p>
+<blockquote>
+<p><code>ffplay rtmp://localhost/myapp/mystream</code></p>
+</blockquote>
+<p><img src="./1501510359019.png" alt="@完美运行！"></p>
 
       
     </div>
@@ -324,13 +375,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2018/06/27/读《岛上书店》和《无声告白》有感/">读《岛上书店》和《无声告白》有感</a></p>
+        <p><span>本文标题:</span><a href="/2018/06/27/直播平台概述和直播服务器架设-md/">直播平台概述和直播服务器架设.md</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Andy</a></p>
-        <p><span>发布时间:</span>2018-06-27, 20:41:49</p>
-        <p><span>最后更新:</span>2018-06-27, 21:22:08</p>
+        <p><span>发布时间:</span>2018-06-27, 21:25:46</p>
+        <p><span>最后更新:</span>2018-06-27, 21:27:41</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2018/06/27/读《岛上书店》和《无声告白》有感/" title="读《岛上书店》和《无声告白》有感">http://mazingan.github.io/2018/06/27/读《岛上书店》和《无声告白》有感/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://mazingan.github.io/2018/06/27/读《岛上书店》和《无声告白》有感/　　作者: Andy" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2018/06/27/直播平台概述和直播服务器架设-md/" title="直播平台概述和直播服务器架设.md">http://mazingan.github.io/2018/06/27/直播平台概述和直播服务器架设-md/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://mazingan.github.io/2018/06/27/直播平台概述和直播服务器架设-md/　　作者: Andy" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -343,11 +394,17 @@
     <nav id="article-nav">
         
             <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2018/06/27/直播平台概述和直播服务器架设-md/">
-                    直播平台概述和直播服务器架设.md
+                <a href="/2018/06/27/基于面部识别的日志系统的设计与实现/">
+                    基于面部识别的日志系统的设计与实现
                 </a>
             </div>
         
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2018/06/27/读《岛上书店》和《无声告白》有感/">
+                    读《岛上书店》和《无声告白》有感
+                </a>
+            </div>
         
     </nav>
 
@@ -357,7 +414,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#《岛上书店》-——因为爱，人们彼此改变"><span class="toc-number">1.</span> <span class="toc-text">《岛上书店》 ——因为爱，人们彼此改变</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#《无声告白》-——我们终此一生，就是要摆脱他人的期待，成为真正的自己"><span class="toc-number">2.</span> <span class="toc-text">《无声告白》 ——我们终此一生，就是要摆脱他人的期待，成为真正的自己</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#爱无罪-但不要以爱之名"><span class="toc-number">3.</span> <span class="toc-text">爱无罪 但不要以爱之名</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#不会做直播还混什么互联网"><span class="toc-number">1.</span> <span class="toc-text">不会做直播还混什么互联网</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#网络直播的技术构架"><span class="toc-number">2.</span> <span class="toc-text">网络直播的技术构架</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#书归正传，先来谈谈直播服务器"><span class="toc-number">3.</span> <span class="toc-text">书归正传，先来谈谈直播服务器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RTMP服务器"><span class="toc-number">4.</span> <span class="toc-text">RTMP服务器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#nginx-rtmp安装"><span class="toc-number">5.</span> <span class="toc-text">nginx-rtmp安装</span></a></li></ol>
         
     </div>
     <style>
@@ -393,7 +450,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"读《岛上书店》和《无声告白》有感　| Andy's Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"直播平台概述和直播服务器架设.md　| Andy's Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -413,7 +470,7 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2018/06/27/直播平台概述和直播服务器架设-md/" title="上一篇: 直播平台概述和直播服务器架设.md">
+            <a href="/2018/06/27/基于面部识别的日志系统的设计与实现/" title="上一篇: 基于面部识别的日志系统的设计与实现">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -421,7 +478,9 @@
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+            <a href="/2018/06/27/读《岛上书店》和《无声告白》有感/" title="下一篇: 读《岛上书店》和《无声告白》有感">
+                <i class="fa fa-angle-right"></i>
+            </a>
         
     </div>
 
