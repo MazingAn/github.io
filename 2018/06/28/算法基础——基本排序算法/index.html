@@ -15,18 +15,18 @@
 
 
 
-<meta name="description" content="The CSRF middleware and template tag provides easy-to-use protection against Cross Site Request Forgeries. This type of attack occurs when a malicious website contains a link, a form button or some J">
-<meta name="keywords" content="django,跨域访问">
+<meta name="description" content="本文中的基础排序算法分类依据是算法的时间复杂度，之所以被称作基础排序算法，是因为他们实现起来比较简单，对应的算法的时间复杂度较高，一般情况下效率较低，但这并不影响我们去学习、使用和优化他们。 算法的时间复杂度算法的时间复杂度，可以简单地理解为其执行指令（粗浅的理解为循环）的次数的多少，记作O,在理想的情况下算法的时间复杂度应该为O(1),其次排列下去有O(n)、O(log(n))、O(n**2)等">
+<meta name="keywords" content="排序算法,算法基础,算法">
 <meta property="og:type" content="article">
-<meta property="og:title" content="关于Django的CSRF和跨域访问机制">
-<meta property="og:url" content="http://mazingan.github.io/2018/06/27/关于Django的CSRF和跨域访问机制/index.html">
+<meta property="og:title" content="算法基础——基本排序算法">
+<meta property="og:url" content="http://mazingan.github.io/2018/06/28/算法基础——基本排序算法/index.html">
 <meta property="og:site_name" content="Andy&#39;s Blog">
-<meta property="og:description" content="The CSRF middleware and template tag provides easy-to-use protection against Cross Site Request Forgeries. This type of attack occurs when a malicious website contains a link, a form button or some J">
+<meta property="og:description" content="本文中的基础排序算法分类依据是算法的时间复杂度，之所以被称作基础排序算法，是因为他们实现起来比较简单，对应的算法的时间复杂度较高，一般情况下效率较低，但这并不影响我们去学习、使用和优化他们。 算法的时间复杂度算法的时间复杂度，可以简单地理解为其执行指令（粗浅的理解为循环）的次数的多少，记作O,在理想的情况下算法的时间复杂度应该为O(1),其次排列下去有O(n)、O(log(n))、O(n**2)等">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-27T13:58:37.985Z">
+<meta property="og:updated_time" content="2018-06-28T08:56:04.802Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="关于Django的CSRF和跨域访问机制">
-<meta name="twitter:description" content="The CSRF middleware and template tag provides easy-to-use protection against Cross Site Request Forgeries. This type of attack occurs when a malicious website contains a link, a form button or some J">
+<meta name="twitter:title" content="算法基础——基本排序算法">
+<meta name="twitter:description" content="本文中的基础排序算法分类依据是算法的时间复杂度，之所以被称作基础排序算法，是因为他们实现起来比较简单，对应的算法的时间复杂度较高，一般情况下效率较低，但这并不影响我们去学习、使用和优化他们。 算法的时间复杂度算法的时间复杂度，可以简单地理解为其执行指令（粗浅的理解为循环）的次数的多少，记作O,在理想的情况下算法的时间复杂度应该为O(1),其次排列下去有O(n)、O(log(n))、O(n**2)等">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -58,7 +58,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>关于Django的CSRF和跨域访问机制 | Andy&#39;s Blog</title>
+<title>算法基础——基本排序算法 | Andy&#39;s Blog</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -265,11 +265,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-关于Django的CSRF和跨域访问机制" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-算法基础——基本排序算法" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/06/27/关于Django的CSRF和跨域访问机制/" class="article-date">
-      <time datetime="2018-06-27T13:49:13.000Z" itemprop="datePublished">2018-06-27</time>
+      <a href="/2018/06/28/算法基础——基本排序算法/" class="article-date">
+      <time datetime="2018-06-28T07:56:02.000Z" itemprop="datePublished">2018-06-28</time>
 </a>
 
 
@@ -284,7 +284,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      关于Django的CSRF和跨域访问机制
+      算法基础——基本排序算法
     </h1>
   
 
@@ -295,7 +295,7 @@
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/django/">django</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/跨域访问/">跨域访问</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/排序算法/">排序算法</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法基础/">算法基础</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -305,20 +305,20 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <blockquote>
-<p>The CSRF middleware and template tag provides easy-to-use protection against Cross Site Request Forgeries. This type of attack occurs when a malicious website contains a link, a form button or some JavaScript that is intended to perform some action on your website, using the credentials of a logged-in user who visits the malicious site in their browser. A related type of attack, ‘login CSRF’, where an attacking site tricks a user’s browser into logging into a site with someone else’s credentials, is also covered.<br>The first defense against CSRF attacks is to ensure that GET requests (and other ‘safe’ methods, as defined by RFC 7231#section-4.2.1) are side effect free. Requests via ‘unsafe’ methods, such as POST, PUT, and DELETE, can then be protected by following the steps below.</p>
-</blockquote>
-<a id="more"></a>
-<p>以上描述来自django官方文档种对CSRF中间件的描述，简单的来说，就是一个页面发出的请求必须来自于这个站点。拿银行来说，银行转账的url可能是这样<code>www.xxbank.com/trans</code>，POST参数为<code>target_id</code>,<code>money</code>;如果现在有一个钓鱼网站诱骗用户输入了银行账户和密码，然后在隐藏表单内提交<code>target_id</code>和<code>money</code>那么钱就莫名其妙的被转走了。这也就是所谓的CSRF。</p>
-<p>django为了解决这个问题，在<code>POST</code>,<code>PUT</code>,<code>DELETE</code>等可以修改数据的方法设置了csrf_token,当用户第一次访问网站的时候，服务端会产生一个随机的安全码作为token，并返回给客户端， 客户端会将token存在cookies里，在进行POST提交的时候，则必须带上这个token，以便于服务器验证。总的来说就是给客户端发令牌， 客户端带着令牌才可以执行操作，否则就返回403.</p>
-<p>在前端的form表单里加上csrf_token,模板会默认在表单内增加一个隐藏项（命名为csrfmiddlewaretoken）。</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;form action=<span class="string">"/login"</span>&gt;</span><br><span class="line">&#123;%csrf_token%&#125;</span><br><span class="line">    &lt;input type=<span class="string">'text'</span> name=<span class="string">'username'</span>/&gt;</span><br><span class="line">    &lt;input type=<span class="string">'password'</span> name=<span class="string">'password'</span>/&gt;</span><br><span class="line">    &lt;button type=<span class="string">'submit'</span>/&gt;</span><br><span class="line">&lt;/form&gt;</span><br></pre></td></tr></table></figure>
-<p>对于ajax则需要手动去设置参数，在进行数据提交之前，在请求头内加上页面之前发送过来的token。django官方提供了从cookie里获得csrf-token的方法：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//ajax设置csrf_token</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">csrfSafeMethod</span>(<span class="params">method</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// these HTTP methowds do not require CSRF protection</span></span><br><span class="line">    <span class="keyword">return</span> (<span class="regexp">/^(GET|HEAD|OPTIONS|TRACE)$/</span>.test(method));</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getCookie</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> cookieValue = <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">document</span>.cookie &amp;&amp; <span class="built_in">document</span>.cookie !== <span class="string">''</span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> cookies = <span class="built_in">document</span>.cookie.split(<span class="string">';'</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; cookies.length; i++) &#123;</span><br><span class="line">            <span class="keyword">var</span> cookie = jQuery.trim(cookies[i]);</span><br><span class="line">            <span class="comment">// Does this cookie s begin with the name we want?</span></span><br><span class="line">            <span class="keyword">if</span> (cookie.substring(<span class="number">0</span>, name.length + <span class="number">1</span>) === (name + <span class="string">'='</span>)) &#123;</span><br><span class="line">                cookieValue = <span class="built_in">decodeURIComponent</span>(cookie.substring(name.length + <span class="number">1</span>));</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> cookieValue;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> csrf_token = getCookie(<span class="string">'csrf_token'</span>);</span><br><span class="line">$.ajaxSetup(&#123;</span><br><span class="line">    beforeSend: <span class="function"><span class="keyword">function</span>(<span class="params">xhr, settings</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!csrfSafeMethod(settings.type) &amp;&amp; !<span class="keyword">this</span>.crossDomain) &#123;</span><br><span class="line">            xhr.setRequestHeader(<span class="string">"X-CSRFToken"</span>, csrf_token);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>执行上述操作之后，在进行正常的ajax提交即可。</p>
-<p>有时候部分浏览器可能拿不到token，这个时候需要使用到装饰器<code>ensure_csrf_cookie</code>.用来装饰需要使用token的view，确保token在第一次访问时被传递到客户端。</p>
-<p>同时，还可以使用 csrf_protecte或csrf_exempt 强制要求一个view使用或不使用CSRF中间件。</p>
-<p>默认情况下，token会被放在cookies里，但也可放在session内，可通过settings配置文件修改，但匿名用户是没有session的。</p>
+        <p>本文中的基础排序算法分类依据是算法的时间复杂度，之所以被称作基础排序算法，是因为他们实现起来比较简单，对应的算法的时间复杂度较高，一般情况下效率较低，但这并不影响我们去学习、使用和优化他们。</p>
+<h3 id="算法的时间复杂度"><a href="#算法的时间复杂度" class="headerlink" title="算法的时间复杂度"></a>算法的时间复杂度</h3><p>算法的时间复杂度，可以简单地理解为其执行指令（粗浅的理解为循环）的次数的多少，记作<code>O</code>,在理想的情况下算法的时间复杂度应该为<code>O(1)</code>,其次排列下去有<code>O(n)</code>、<code>O(log(n))</code>、<code>O(n**2)</code>等。</p>
+<h3 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h3><p>选择排序是一种常见的较容易实现的排序算法，算法的思想是：经过多轮遍历，不断缩小列表的区间，在这个区间内再遍历（选择）最小值。所以它的时间复杂度为<code>O(N**2)</code>。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">selectionSort</span><span class="params">(T* arr, <span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n<span class="number">-1</span>; i++)&#123;</span><br><span class="line">        <span class="keyword">int</span> minIndex = i;</span><br><span class="line">        <span class="comment">//在[i,n)区间内寻找最小值的下标</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = i+<span class="number">1</span>; j &lt; n; j++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(arr[j] &lt; arr[minIndex])&#123;</span><br><span class="line">                minIndex = j;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//把找到的最小值放到区间的最左边</span></span><br><span class="line">        swap(arr[minIndex], arr[i])</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h3><p>插入排序就像是整理手上的扑克牌，每当有一张新牌接到手上后，都要去选择一个合适的位置插入，最终整套手牌都会排序完成。它的时间复杂度为<code>O(N**2)</code>。插入排序的好处是，每一次排序之后，排序过后的序列都是有序的，所以在内层遍历比较中，一旦发现用来比对的数据比当前数据大，则直接可以跳出循环。所以，在最理想的情况下，如果数据本来就是已经排序好的，那么插入排序的是时间复杂度可以为<code>O(n)</code>，在近似于有序的序列排序中，插入排序的时间复杂度很多时候超过了很多高级排序算法(<code>O(lg(n))</code>)。</p>
+<p><strong>一般情况下的插入排序</strong>:效率较低，因为频繁的进行交换操作（以此交换等于三次赋值）</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insertionSort</span><span class="params">(T* arr, <span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">    <span class="comment">//循环从第二张牌开始，因为针对第一张牌来讲，本来就是有序的</span></span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = i; j &gt; <span class="number">0</span>; j--)&#123;</span><br><span class="line">            <span class="comment">//内层遍历从i开始，向前遍历比较，如果小则交换，否则跳出</span></span><br><span class="line">            <span class="keyword">if</span>(arr[j] &lt; arr[j<span class="number">-1</span>])&#123;</span><br><span class="line">                swap(arr[j], arr[j<span class="number">-1</span>]);</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>优化之后的插入排序</strong>：优化之后避免了频繁的赋值操作。在排序的思想上，相当于把当前的手牌提出来，挨个向前比对，如果前面的牌比当前牌大，前面的牌就后移一位，最终找到的是的位置的时候，这个位置就是空的，这个时候把当前牌放入即可。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insertionSort</span><span class="params">(T* arr, <span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">    <span class="comment">//循环从第二张牌开始，因为针对第一张牌来讲，本来就是有序的</span></span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++)&#123;</span><br><span class="line">        T e = arr[i];</span><br><span class="line">        <span class="keyword">int</span> j;</span><br><span class="line">        <span class="keyword">for</span>(j = i; j &gt; <span class="number">0</span> &amp;&amp; arr[j] &gt; e; j--)&#123;</span><br><span class="line">            arr[j] = arr[j<span class="number">-1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        arr[j] = e;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h3><p>冒泡排序是一种很形象的描述，在排序过程中冒泡排序会和相邻的元素比较，然后建换位置，循环往复到序列的尽头，最大的数字就被放在了最右边（或最小的元素被放在最左边），就像冒泡泡一样，谁最大（小）谁先冒出来。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">bubbleSort</span><span class="params">(T* arr, <span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">    <span class="comment">//大的循环控制区间范围，随着最大的泡泡冒出，区间被不断的缩小</span></span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = n<span class="number">-1</span>; i &gt; <span class="number">0</span>; i--)&#123;</span><br><span class="line">        <span class="comment">//内层循环不断地和下一个元素比较，最终把最大的泡泡冒上去</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; i; j++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(arr[j] &gt; arr[j+<span class="number">1</span>])&#123;</span><br><span class="line">                swap(arr[j], arr[j+<span class="number">1</span>])</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>以上是常见的所有的时间复杂度为<code>O(n**2)</code>的排序算法，但是时间复杂度复杂并不代表算法差劲，重要的是理解算法的思想，排序算法的集中思想影响着很多其他的算法。再者，在一些特殊情况下时间和空间的复杂度也并不是评判算法的唯一标准。比如上述算法中的插入排序在面对近似有序的寻列排序中，其效率大多数时候要超越一些时间复杂度为<code>O(n*logn(n))</code>的算法。</p>
+<p>###　相关代码</p>
+<p><a href="https://github.com/MazingAn/Sorting_Basic" target="_blank" rel="noopener">github</a><br>C++实现的O(n**2)的基本排序算法, 欢迎点星星！</p>
 
       
     </div>
@@ -327,13 +327,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2018/06/27/关于Django的CSRF和跨域访问机制/">关于Django的CSRF和跨域访问机制</a></p>
+        <p><span>本文标题:</span><a href="/2018/06/28/算法基础——基本排序算法/">算法基础——基本排序算法</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Andy</a></p>
-        <p><span>发布时间:</span>2018-06-27, 21:49:13</p>
-        <p><span>最后更新:</span>2018-06-27, 21:58:37</p>
+        <p><span>发布时间:</span>2018-06-28, 15:56:02</p>
+        <p><span>最后更新:</span>2018-06-28, 16:56:04</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2018/06/27/关于Django的CSRF和跨域访问机制/" title="关于Django的CSRF和跨域访问机制">http://mazingan.github.io/2018/06/27/关于Django的CSRF和跨域访问机制/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://mazingan.github.io/2018/06/27/关于Django的CSRF和跨域访问机制/　　作者: Andy" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2018/06/28/算法基础——基本排序算法/" title="算法基础——基本排序算法">http://mazingan.github.io/2018/06/28/算法基础——基本排序算法/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://mazingan.github.io/2018/06/28/算法基础——基本排序算法/　　作者: Andy" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -345,16 +345,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2018/06/27/使用namedtupe构建没有方法的对象/">
-                    使用namedtupe构建没有方法的对象
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2018/06/27/基于面部识别的日志系统的设计与实现/">
-                    基于面部识别的日志系统的设计与实现
+                <a href="/2018/06/27/python语言特性之引用/">
+                    python语言特性之引用
                 </a>
             </div>
         
@@ -366,7 +360,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#算法的时间复杂度"><span class="toc-number">1.</span> <span class="toc-text">算法的时间复杂度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#选择排序"><span class="toc-number">2.</span> <span class="toc-text">选择排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#插入排序"><span class="toc-number">3.</span> <span class="toc-text">插入排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#冒泡排序"><span class="toc-number">4.</span> <span class="toc-text">冒泡排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#总结"><span class="toc-number">5.</span> <span class="toc-text">总结</span></a></li></ol>
         
     </div>
     <style>
@@ -402,7 +396,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"关于Django的CSRF和跨域访问机制　| Andy's Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"算法基础——基本排序算法　| Andy's Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -422,15 +416,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2018/06/27/使用namedtupe构建没有方法的对象/" title="上一篇: 使用namedtupe构建没有方法的对象">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2018/06/27/基于面部识别的日志系统的设计与实现/" title="下一篇: 基于面部识别的日志系统的设计与实现">
+            <a href="/2018/06/27/python语言特性之引用/" title="下一篇: python语言特性之引用">
                 <i class="fa fa-angle-right"></i>
             </a>
         
