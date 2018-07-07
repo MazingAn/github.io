@@ -15,20 +15,13 @@
 
 
 
-<meta name="description" content="直线和面在线性代数内可以被参数化，从而可以发现很多有意思的事情，比如直线之间的交点、面与面之间的交点或交线。求解交点或交线就是求解一个多元线性方程组，而要求解多元线性方程组则需要用到高斯消元法。">
-<meta name="keywords" content="线性代数,机器学习基础,高斯消元">
-<meta property="og:type" content="article">
-<meta property="og:title" content="直线、面、相交和高斯消元">
-<meta property="og:url" content="http://mazingan.github.io/2018/07/02/直线、面、相交和高斯消元/index.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Andy&#39;s Blog">
+<meta property="og:url" content="http://mazingan.github.io/archives/2018/page/2/index.html">
 <meta property="og:site_name" content="Andy&#39;s Blog">
-<meta property="og:description" content="直线和面在线性代数内可以被参数化，从而可以发现很多有意思的事情，比如直线之间的交点、面与面之间的交点或交线。求解交点或交线就是求解一个多元线性方程组，而要求解多元线性方程组则需要用到高斯消元法。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://oe3hv1l98.bkt.clouddn.com/1061942725.jpg">
-<meta property="og:updated_time" content="2018-07-02T08:24:38.356Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="直线、面、相交和高斯消元">
-<meta name="twitter:description" content="直线和面在线性代数内可以被参数化，从而可以发现很多有意思的事情，比如直线之间的交点、面与面之间的交点或交线。求解交点或交线就是求解一个多元线性方程组，而要求解多元线性方程组则需要用到高斯消元法。">
-<meta name="twitter:image" content="http://oe3hv1l98.bkt.clouddn.com/1061942725.jpg">
+<meta name="twitter:title" content="Andy&#39;s Blog">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -60,7 +53,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>直线、面、相交和高斯消元 | Andy&#39;s Blog</title>
+<title>Archives: 2018 | Andy&#39;s Blog</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -70,8 +63,8 @@
         fancybox: true,
         animate: true,
         isHome: false,
-        isPost: true,
-        isArchive: false,
+        isPost: false,
+        isArchive: true,
         isTag: false,
         isCategory: false,
         fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
@@ -265,173 +258,60 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-直线、面、相交和高斯消元" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap">
   
-    <div class="article-meta">
-      <a href="/2018/07/02/直线、面、相交和高斯消元/" class="article-date">
-      <time datetime="2018-07-02T08:12:15.000Z" itemprop="datePublished">2018-07-02</time>
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2018" class="archive-year">2018</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+          <div class="article-meta">
+              <a href="/2018/06/27/读《岛上书店》和《无声告白》有感/" class="archive-article-date">
+      <time datetime="2018-06-27T12:41:49.000Z" itemprop="datePublished">06-27</time>
 </a>
 
 
-    </div>
+        </div>
+         
   
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      直线、面、相交和高斯消元
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2018/06/27/读《岛上书店》和《无声告白》有感/">读《岛上书店》和《无声告白》有感</a>
     </h1>
   
 
-      </header>
-      
-      <div class="article-info article-info-post">
-        
-
-        
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/机器学习基础/">机器学习基础</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/线性代数/">线性代数</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/高斯消元/">高斯消元</a></li></ul>
-    </div>
-
-        <div class="clearfix"></div>
-      </div>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
+        <div class="article-info info-on-archive">
           
-        <p>直线和面在线性代数内可以被参数化，从而可以发现很多有意思的事情，比如直线之间的交点、面与面之间的交点或交线。求解交点或交线就是求解一个多元线性方程组，而要求解多元线性方程组则需要用到高斯消元法。<br><a id="more"></a></p>
-<p><img src="http://oe3hv1l98.bkt.clouddn.com/1061942725.jpg" alt="笔记整理，直线、面、相交和高斯消元"></p>
 
-      
-    </div>
-    
-  </div>
-  
-    
-    <div class="copyright">
-        <p><span>本文标题:</span><a href="/2018/07/02/直线、面、相交和高斯消元/">直线、面、相交和高斯消元</a></p>
-        <p><span>文章作者:</span><a href="/" title="回到主页">Andy</a></p>
-        <p><span>发布时间:</span>2018-07-02, 16:12:15</p>
-        <p><span>最后更新:</span>2018-07-02, 16:24:38</p>
-        <p>
-            <span>原始链接:</span><a class="post-url" href="/2018/07/02/直线、面、相交和高斯消元/" title="直线、面、相交和高斯消元">http://mazingan.github.io/2018/07/02/直线、面、相交和高斯消元/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://mazingan.github.io/2018/07/02/直线、面、相交和高斯消元/　　作者: Andy" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
-            <script> var clipboard = new Clipboard('.copy-path'); </script>
-        </p>
-        <p>
-            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
-        </p>
+          
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/读书/">读书</a></li></ul>
     </div>
 
-
-
-    <nav id="article-nav">
-        
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2018/07/07/python经典面试题收录/">
-                    python经典面试题收录
-                </a>
-            </div>
-        
-        
-            <div id="article-nav-older" class="article-nav-title">
-                <a href="/2018/07/01/向量的基本知识和原理/">
-                    向量的基本知识和原理
-                </a>
-            </div>
-        
-    </nav>
-
-  
-</article>
-
-    <div id="toc" class="toc-article">
-        <strong class="toc-title">文章目录</strong>
-        
-            
-        
-    </div>
-    <style>
-        .left-col .switch-btn,
-        .left-col .switch-area {
-            display: none;
-        }
-        .toc-level-3 i,
-        .toc-level-3 ol {
-            display: none !important;
-        }
-    </style>
-
-    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
-
-    <script>
-        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
-    </script>
-
-
-
-    
-<div class="share">
-    
-        <div class="bdsharebuttonbox">
-            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
-            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
-            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
-            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
-            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
-            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
-            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
         </div>
-        <script>
-            window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"直线、面、相交和高斯消元　| Andy's Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
-        </script>
-    
+        <div class="clearfix"></div>
+    </header>
+  </div>
+</article>
+  
+  
+    </div></section>
+  
 
     
-</div>
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/archives/2018/">&laquo; Prev</a><a class="page-number" href="/archives/2018/">1</a><span class="page-number current">2</span>
+    </nav>
+  
 
-
-
-
-
-
-
-    
-
-
-
-
-    <div class="scroll" id="post-nav-button">
-        
-            <a href="/2018/07/07/python经典面试题收录/" title="上一篇: python经典面试题收录">
-                <i class="fa fa-angle-left"></i>
-            </a>
-        
-
-        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
-
-        
-            <a href="/2018/07/01/向量的基本知识和原理/" title="下一篇: 向量的基本知识和原理">
-                <i class="fa fa-angle-right"></i>
-            </a>
-        
-    </div>
-
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/07/07/python经典面试题收录/">python经典面试题收录</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/02/直线、面、相交和高斯消元/">直线、面、相交和高斯消元</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/01/向量的基本知识和原理/">向量的基本知识和原理</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/01/Who-Are-You-You-Are-Every-Single-Day/">Who Are You, You Are Every Single Day.</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/28/算法基础——基本排序算法/">算法基础——基本排序算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/27/python语言特性之引用/">python语言特性之引用</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/27/使用namedtupe构建没有方法的对象/">使用namedtupe构建没有方法的对象</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/27/关于Django的CSRF和跨域访问机制/">关于Django的CSRF和跨域访问机制</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/27/基于面部识别的日志系统的设计与实现/">基于面部识别的日志系统的设计与实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/27/直播平台概述和直播服务器架设-md/">直播平台概述和直播服务器架设.md</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/27/读《岛上书店》和《无声告白》有感/">读《岛上书店》和《无声告白》有感</a></li></ul>
-
-
-
-
-    <script>
-        
-    </script>
 </div>
       <footer id="footer">
     <div class="outer">
