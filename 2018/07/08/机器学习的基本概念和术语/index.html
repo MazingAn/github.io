@@ -15,18 +15,18 @@
 
 
 
-<meta name="description" content="自Python2.6开始，namedtuple就加入到Python里，用以构建只有少数属性但是没有方法的对象，比如数据库条目。">
-<meta name="keywords" content="python,namedtuple">
+<meta name="description" content="在人类世界里有 “吾日三省吾身”、“知错能改，善莫大焉”、“温故而知新，可以为师矣”这些话。这些话都是人类取回顾过去发生的事情，通过发生过的事务去总结经验或者从旧的事务中总结规律。总之，这是几十万年来人类一直都具备的天性，我们称之为人类的学习。">
+<meta name="keywords" content="机器学习,西瓜书阅读笔记">
 <meta property="og:type" content="article">
-<meta property="og:title" content="使用namedtupe构建没有方法的对象">
-<meta property="og:url" content="http://mazingan.github.io/2018/06/27/使用namedtupe构建没有方法的对象/index.html">
+<meta property="og:title" content="机器学习的基本概念和术语">
+<meta property="og:url" content="http://mazingan.github.io/2018/07/08/机器学习的基本概念和术语/index.html">
 <meta property="og:site_name" content="Andy&#39;s Blog">
-<meta property="og:description" content="自Python2.6开始，namedtuple就加入到Python里，用以构建只有少数属性但是没有方法的对象，比如数据库条目。">
+<meta property="og:description" content="在人类世界里有 “吾日三省吾身”、“知错能改，善莫大焉”、“温故而知新，可以为师矣”这些话。这些话都是人类取回顾过去发生的事情，通过发生过的事务去总结经验或者从旧的事务中总结规律。总之，这是几十万年来人类一直都具备的天性，我们称之为人类的学习。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-27T14:02:08.494Z">
+<meta property="og:updated_time" content="2018-07-08T08:25:07.045Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="使用namedtupe构建没有方法的对象">
-<meta name="twitter:description" content="自Python2.6开始，namedtuple就加入到Python里，用以构建只有少数属性但是没有方法的对象，比如数据库条目。">
+<meta name="twitter:title" content="机器学习的基本概念和术语">
+<meta name="twitter:description" content="在人类世界里有 “吾日三省吾身”、“知错能改，善莫大焉”、“温故而知新，可以为师矣”这些话。这些话都是人类取回顾过去发生的事情，通过发生过的事务去总结经验或者从旧的事务中总结规律。总之，这是几十万年来人类一直都具备的天性，我们称之为人类的学习。">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -58,7 +58,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>使用namedtupe构建没有方法的对象 | Andy&#39;s Blog</title>
+<title>机器学习的基本概念和术语 | Andy&#39;s Blog</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -263,11 +263,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-使用namedtupe构建没有方法的对象" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-机器学习的基本概念和术语" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/06/27/使用namedtupe构建没有方法的对象/" class="article-date">
-      <time datetime="2018-06-27T14:00:00.000Z" itemprop="datePublished">2018-06-27</time>
+      <a href="/2018/07/08/机器学习的基本概念和术语/" class="article-date">
+      <time datetime="2018-07-08T06:38:28.000Z" itemprop="datePublished">2018-07-08</time>
 </a>
 
 
@@ -282,7 +282,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      使用namedtupe构建没有方法的对象
+      机器学习的基本概念和术语
     </h1>
   
 
@@ -293,7 +293,7 @@
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/namedtuple/">namedtuple</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/机器学习/">机器学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/西瓜书阅读笔记/">西瓜书阅读笔记</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -303,12 +303,30 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>自Python2.6开始，namedtuple就加入到Python里，用以构建只有少数属性但是没有方法的对象，比如数据库条目。</p>
+        <p>在人类世界里有 <code>“吾日三省吾身”</code>、<code>“知错能改，善莫大焉”</code>、<code>“温故而知新，可以为师矣”</code>这些话。这些话都是人类取回顾过去发生的事情，通过发生过的事务去总结经验或者从旧的事务中总结规律。总之，这是几十万年来人类一直都具备的天性，我们称之为人类的学习。</p>
 <a id="more"></a>
- <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> namedtuple</span><br><span class="line"></span><br><span class="line">Card = namedtuple(<span class="string">"Card"</span>, [<span class="string">"rank"</span>, <span class="string">"suit"</span>])</span><br><span class="line">beer_card = Card[<span class="string">'7'</span>, <span class="string">'diamonds'</span>]</span><br><span class="line">beer_card.rank</span><br><span class="line">beer_card.suit</span><br></pre></td></tr></table></figure>
-<h2 id="使用实例：-创建一摞纸牌"><a href="#使用实例：-创建一摞纸牌" class="headerlink" title="使用实例： 创建一摞纸牌"></a>使用实例： 创建一摞纸牌</h2> <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">import</span> collections</span><br><span class="line"> </span><br><span class="line"> Card = collections.namedtuple(<span class="string">"Card"</span>, [<span class="string">"rand"</span>, <span class="string">"suit"</span>])</span><br><span class="line"> </span><br><span class="line"> <span class="class"><span class="keyword">class</span> <span class="title">FrenchDeck</span>:</span></span><br><span class="line">    ranks = [str(n) <span class="keyword">for</span> n <span class="keyword">in</span> range(<span class="number">2</span>,<span class="number">11</span>)] + list(<span class="string">'JQKA'</span>)</span><br><span class="line">    suits = <span class="string">'spades diamonds clubs hearts'</span>.split()</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self._cards = [Card(rank, suit) <span class="keyword">for</span> suit <span class="keyword">in</span> self.suits</span><br><span class="line">                                        <span class="keyword">for</span> rank <span class="keyword">in</span> self.ranks]</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__len__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> len(self._cards)</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getitem__</span><span class="params">(self, position)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self._cards[position]</span><br><span class="line"></span><br><span class="line">deck = FrenchDeck()</span><br><span class="line">len(deck) <span class="comment">#output: 52</span></span><br><span class="line">deck[<span class="number">0</span>]   <span class="comment">#output: Card(rank='2', suit='spades')</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> random <span class="keyword">import</span> choice</span><br><span class="line">choice(deck)<span class="comment">#随机抽取一张牌</span></span><br></pre></td></tr></table></figure>
-<p> 上面创建纸牌的代码可以说是非常的pythonic了，首先使用collections.namedtuple创建一个纸牌对象，然后创建一个套牌类。 套牌类初始方法创建了52张牌。</p>
-<p> 特殊方法(under under method), <strong>len</strong>()的实现使得我们可以直接使用len()函数去测量对象的尺寸；<strong>getitem</strong>()函数则使我们可以方便的获取元素，并且支持切片，支持迭代(包括反向迭代)</p>
+<h3 id="为什么我会选择机器学习"><a href="#为什么我会选择机器学习" class="headerlink" title="为什么我会选择机器学习"></a>为什么我会选择机器学习</h3><p>每一个热爱技术的人心中都有一个信条，那便是——技术改变世界。或许每一个人心中都曾经有过改变世界的想法，少部分人做到了并得到了大家的认可，还有一大部分人也做到了只不过自己没有发现。 对于我来讲，9年前初学编程的时候，梦想是有一天能去给国家放卫星，虽然后来没有实现，不过我也换了其他的方法去报效自己的祖国，并为之付出了八年的青春。</p>
+<p>通过技术，我或多或少的贡献了一些自己的力量，随着时代的发展很多原本被称之为技术的东西降级成了技能，很多新的东西出现成为新的技术，也有很多以前没有被实现的想法被重新翻出来尝试，然后升级为技术，机器学习就是后者。随着技术的进步与降级，我逐渐开始思考，技术的本质可能就是很早以前就有的那句话——解放生产力。而当下最真实的写照非人工智能莫属了。</p>
+<p>对我来说，学习机器学习或人工智能，就是在攀登技术的高峰（也许对别人来讲就是一个小土坡），为了不被时代所淘汰，为了自己曾经引以为傲的某种被称作编程的技术降级成为技能之后，自己手里还有东西好让我继续我保持某种奇怪的优越感。</p>
+<h3 id="什么是机器学习"><a href="#什么是机器学习" class="headerlink" title="什么是机器学习"></a>什么是机器学习</h3><p>在人类世界里有 <code>“吾日三省吾身”</code>、<code>“知错能改，善莫大焉”</code>、<code>“温故而知新，可以为师矣”</code>这些话。这些话都是人类取回顾过去发生的事情，通过发生过的事务去总结经验或者从旧的事务中总结规律。总之，这是几十万年来人类一直都具备的天性，我们称之为人类的学习。</p>
+<p>在机器的世界里，机器也可以进行类似的学习，对于机器来说过往的经验就是历史数据。计算机从数据中学习，产生一个模型，然后用这个模型去解决一类问题，这样的过程被叫做机器学习。</p>
+<blockquote>
+<p>一个更形式化的定义[Mitchell,1977]：假设用P来评估计算机程序在某任务类T上的性能，若一个程序通过利用经验E在T中任务上获得了性能改善，则我们就说关于T和P，该程序对E进行了学习。</p>
+</blockquote>
+<h3 id="机器学习的数据和术语"><a href="#机器学习的数据和术语" class="headerlink" title="机器学习的数据和术语"></a>机器学习的数据和术语</h3><p>巧妇难为无米之炊，没有数据机器学习就无法开始。</p>
+<p>假设我们收集了很多数据，这些数据的集合就被称之为 <strong>数据集(data set)</strong> ;单个拿出来一条记录，称为一个 <strong>示例(instance)</strong> 或 <strong>样本（sample）</strong> ；记录中有一些对数据的描述，我们称之为 <strong>属性(attribute)</strong> 或者 <strong>特征(feature)</strong>;这些属性一般都有一个具体地内容来形容（比如数值，形容词），我成称之为 <strong>属性值(attribute value)</strong> ; 属性值张成的空间则被称为 <strong>属性空间（attribute space）</strong> 、<strong>样本空间（sample space）</strong> 或 <strong>输入空间</strong>。</p>
+<p>用公示表达就是， $D={x_1,x_2,…,x_m }$ 同时 $x_i=(x_{i1},x_{i2},…x_{id})$。对着这两个公式，其中<code>D</code>是一个包含了<code>m</code>个示例$x_i$的数据集,每个示例有<code>d</code>个属性，$x_i=(x_{i1},x_{i2},…x_{id})$实在d纬样本空间$X$中的一个向量，$x_i \in X$,其中$x_{ij}$是$x_i$在第<code>j</code>个属性上的取值，<code>d</code>称为样本$x_i$的维数。</p>
+<p>从数据中学得模型的过程称之为 <strong>学习(learning)</strong> 或 <strong>训练(training)</strong>， 训练过程中使用的数据称为 <strong>训练数据(training data)</strong>，其中每一个样本被称之为<strong>训练样本(training sample)</strong>, 训练样本组成的集合称为<strong>训练集(training set)</strong>; 学习模型对应了许多关于数据的某种潜在规律，称之为<strong>假设(hypothesis)</strong>.</p>
+<h3 id="监督学习：离散和连续-分类与回归"><a href="#监督学习：离散和连续-分类与回归" class="headerlink" title="监督学习：离散和连续,分类与回归"></a>监督学习：离散和连续,分类与回归</h3><p>在训练过程中，已经知道训练集中$x_i$已经被<strong>标记(label)</strong>，习得的模型最终解决问题的具体体现则是根据一个新样本的特征的到对应的标记，这样的学习被称为<strong>监督学习(supervised learning)</strong>。</p>
+<p>分类和回归是监督学习的代表。</p>
+<p>如果最终得到的标记是离散值，比如某一组形容词（好，不太好，坏），那么此类学习任务被称为 <strong>分类(classifacation)</strong>;如果最后要预测表的标记是连续值，比如（１,0.75,0.5），那么此类学习被称作 <strong>回归(regression)</strong>．</p>
+<p>一般地,预测任务是希望通过对训练集${(x_1,y_1), (x_,y_2), {\cdots},{x_m,y_m}}$进行学习,建立一个从输入空间$X$到输出空间$Y$的映射:$f:x \to y$.</p>
+<p>对于分类问题:按照类别的数量区分有二分类任务和多分类任务.<br>如果只涉及两个类别的分类，这中分类被称为　<strong>二分类 (binary classifation)</strong>, 通常成其中一个分类为 <strong>正类(positive class)</strong>, 另一个自然就是 <strong>反类（negative class）</strong>; 对于二分类任务,得到的结果,通常是让 $Y={-1,+1}$ 或者 ${0, 1}$<br>如果设计多个类别的时候,则称为 <strong>多分类(multi-class classifation)</strong>.对于多分类任务$|Y| &gt; 2$.<br>由于回归问题得到的输出是连续纸,所以$Y=R$, R为实数集.</p>
+<h3 id="非监督学习"><a href="#非监督学习" class="headerlink" title="非监督学习"></a>非监督学习</h3><p>有些时候，参与训练的数据集并没有被标记，这个时候可以对这些数据进行 <strong>聚类(clustering)</strong>，这有点类似于google和百度的新闻页面，当打开页面之后很多新闻自动的被放置在了一个组内。 把训练集分成若干个组，这样的组被称为 <strong>簇(cluster)</strong>,这些自动形成的簇可以自动的对应一些潜在的概念划分，如军事新闻，政治新闻，娱乐八卦，但事实上我们并没有类似“军事新闻”、“政治新闻”这类的标记和概念。</p>
+<p>聚类是非监督学习的代表。</p>
+<blockquote>
+<p>本文是对周志华教授《机器学习》的学习笔记的整理和部分内容的摘录。</p>
+</blockquote>
 
       
     </div>
@@ -317,13 +335,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2018/06/27/使用namedtupe构建没有方法的对象/">使用namedtupe构建没有方法的对象</a></p>
+        <p><span>本文标题:</span><a href="/2018/07/08/机器学习的基本概念和术语/">机器学习的基本概念和术语</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Andy</a></p>
-        <p><span>发布时间:</span>2018-06-27, 22:00:00</p>
-        <p><span>最后更新:</span>2018-06-27, 22:02:08</p>
+        <p><span>发布时间:</span>2018-07-08, 14:38:28</p>
+        <p><span>最后更新:</span>2018-07-08, 16:25:07</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2018/06/27/使用namedtupe构建没有方法的对象/" title="使用namedtupe构建没有方法的对象">http://mazingan.github.io/2018/06/27/使用namedtupe构建没有方法的对象/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://mazingan.github.io/2018/06/27/使用namedtupe构建没有方法的对象/　　作者: Andy" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2018/07/08/机器学习的基本概念和术语/" title="机器学习的基本概念和术语">http://mazingan.github.io/2018/07/08/机器学习的基本概念和术语/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://mazingan.github.io/2018/07/08/机器学习的基本概念和术语/　　作者: Andy" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -335,16 +353,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2018/06/27/python语言特性之引用/">
-                    python语言特性之引用
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2018/06/27/关于Django的CSRF和跨域访问机制/">
-                    关于Django的CSRF和跨域访问机制
+                <a href="/2018/07/07/python经典面试题收录/">
+                    python经典面试题收录
                 </a>
             </div>
         
@@ -356,7 +368,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#使用实例：-创建一摞纸牌"><span class="toc-number">1.</span> <span class="toc-text">使用实例： 创建一摞纸牌</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#为什么我会选择机器学习"><span class="toc-number">1.</span> <span class="toc-text">为什么我会选择机器学习</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是机器学习"><span class="toc-number">2.</span> <span class="toc-text">什么是机器学习</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#机器学习的数据和术语"><span class="toc-number">3.</span> <span class="toc-text">机器学习的数据和术语</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#监督学习：离散和连续-分类与回归"><span class="toc-number">4.</span> <span class="toc-text">监督学习：离散和连续,分类与回归</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#非监督学习"><span class="toc-number">5.</span> <span class="toc-text">非监督学习</span></a></li></ol>
         
     </div>
     <style>
@@ -392,7 +404,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"使用namedtupe构建没有方法的对象　| Andy's Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"机器学习的基本概念和术语　| Andy's Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -412,15 +424,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2018/06/27/python语言特性之引用/" title="上一篇: python语言特性之引用">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2018/06/27/关于Django的CSRF和跨域访问机制/" title="下一篇: 关于Django的CSRF和跨域访问机制">
+            <a href="/2018/07/07/python经典面试题收录/" title="下一篇: python经典面试题收录">
                 <i class="fa fa-angle-right"></i>
             </a>
         
