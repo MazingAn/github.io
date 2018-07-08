@@ -23,7 +23,7 @@
 <meta property="og:site_name" content="Andy&#39;s Blog">
 <meta property="og:description" content="对一类问题，机器学习的算法层出不穷，得出的模型也各有千秋，那么到底应该选择什么样的模型呢？我们需要进行模型评估。我们可以把要解决的问题看作是一辆破损的汽车，解决问题的模型看作是扳手、钳子之类的工具，用不同的工具去维修这辆破损的汽车会得到不同的结果，要去判断这个结果的好坏就需要使用测量工具来评估，也许我们要用量角器、也许直接使用直尺，这就要根据情况而定了。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-08T16:36:13.220Z">
+<meta property="og:updated_time" content="2018-07-08T16:48:33.158Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="模型的评估与选择">
 <meta name="twitter:description" content="对一类问题，机器学习的算法层出不穷，得出的模型也各有千秋，那么到底应该选择什么样的模型呢？我们需要进行模型评估。我们可以把要解决的问题看作是一辆破损的汽车，解决问题的模型看作是扳手、钳子之类的工具，用不同的工具去维修这辆破损的汽车会得到不同的结果，要去判断这个结果的好坏就需要使用测量工具来评估，也许我们要用量角器、也许直接使用直尺，这就要根据情况而定了。">
@@ -305,47 +305,50 @@
           
         <p>对一类问题，机器学习的算法层出不穷，得出的模型也各有千秋，那么到底应该选择什么样的模型呢？我们需要进行模型评估。我们可以把要解决的问题看作是一辆破损的汽车，解决问题的模型看作是扳手、钳子之类的工具，用不同的工具去维修这辆破损的汽车会得到不同的结果，要去判断这个结果的好坏就需要使用测量工具来评估，也许我们要用量角器、也许直接使用直尺，这就要根据情况而定了。</p>
 <a id="more"></a>
-<h3 id="经验误差与过拟合"><a href="#经验误差与过拟合" class="headerlink" title="经验误差与过拟合"></a>经验误差与过拟合</h3><p>错误率（error rate）：我们通常把分类错误的样本数占样本总数的比例称为错误率。</p>
+<h2 id="经验误差与过拟合"><a href="#经验误差与过拟合" class="headerlink" title="经验误差与过拟合"></a>经验误差与过拟合</h2><p>错误率（error rate）：我们通常把分类错误的样本数占样本总数的比例称为错误率。</p>
 <p>精度（accuracy）：精度等与１减去错误率。</p>
 <p>误差（error）：我们把机器学习的实际预测输出与样本的真实输出之间的差异称之为误差。</p>
 <p>训练误差(training error)：机器学习在训练集上的误差称之为训练误差。</p>
 <p>泛化误差（generaliztion error）：机器学习在新样本上的误差称之为泛化误差。</p>
 <p>很明显，我们希望得到泛化误差很小的学习器，但是由于不知道新样本是什么样的，所以只能尽量让训练误差最小。看上去这没什么问题，但是事实上凡事都需要有一个度，很多时候我们甚至能得到在训练集中分类错误率为０，精度为100%的学习器，但是大多数时候这样的模型并不好用。</p>
 <p>当学习器把训练样本学的太好了，很可能会把训练样本本身的特点当成了所有潜在样本的特点，事实上这写特点是样本所独有的，那么最终的泛化误差可想而知就会很大了，也就是说返回性能下降了，这种现象在机器学习中称作<strong>过拟合</strong>。与过拟合相对的是<strong>欠拟合</strong>，简单的来说，就是对训练样本的学习还不太到位。</p>
-<p>回到最开始的问题，很明显要评估一个模型是否适合解决此类问题最好的办法就是利用泛华误差，但是新样本到底是个什么鬼我们终究还是不知道的，也就无法得到泛华误差，而使用训练误差又会存在过拟合的问题，那么到底应该怎么去评估呢？<br>zhenshi</p>
-<h3 id="评估方法"><a href="#评估方法" class="headerlink" title="评估方法"></a>评估方法</h3><p>要得到泛化误差其实也并不能，我们从已有数据集中抽出来一部分作为测试集，得到测试误差，把这个测试误差作为淡化误差的近似。简单来说，就是把训练集中的一部分数据当做训练集，还有一部分假装是未知样本，然后用这些样本来校验模型。需要注意的问题就是，这一部分被临时抽出来假扮路人的测试集，从头至尾都不可以参加训练。那么，对于一组数据集，又搞训练，有得客串测试，到底要怎么做呢？下面是几种常见的办法：</p>
-<h4 id="留出法（hold-out）"><a href="#留出法（hold-out）" class="headerlink" title="留出法（hold-out）"></a>留出法（hold-out）</h4><p>直接将数据集$D$分为两个互斥的集合，其中一个作为训练集$S$,另一个作为测试集$T$,他们满足如下关系：<br>$$D=S \cup T , S \cap T=\emptyset $$</p>
+<p>回到最开始的问题，很明显要评估一个模型是否适合解决此类问题最好的办法就是利用泛华误差，但是新样本到底是个什么鬼我们终究还是不知道的，也就无法得到泛华误差，而使用训练误差又会存在过拟合的问题，那么到底应该怎么去评估呢？</p>
+<h2 id="评估方法"><a href="#评估方法" class="headerlink" title="评估方法"></a>评估方法</h2><p>要得到泛化误差其实也并不能，我们从已有数据集中抽出来一部分作为测试集，得到测试误差，把这个测试误差作为淡化误差的近似。简单来说，就是把训练集中的一部分数据当做训练集，还有一部分假装是未知样本，然后用这些样本来校验模型。需要注意的问题就是，这一部分被临时抽出来假扮路人的测试集，从头至尾都不可以参加训练。那么，对于一组数据集，又搞训练，有得客串测试，到底要怎么做呢？下面是几种常见的办法：</p>
+<h3 id="留出法（hold-out）"><a href="#留出法（hold-out）" class="headerlink" title="留出法（hold-out）"></a>留出法（hold-out）</h3><p>直接将数据集$D$分为两个互斥的集合，其中一个作为训练集$S$,另一个作为测试集$T$,他们满足如下关系：<br>$$D=S \cup T , S \cap T=\emptyset $$</p>
 <p>比如，$D$现在包含1000个样本，训练集$S$包含其中的700个样本，测试集$T$包含另外的300个样本，用$S$进行训练之后得到的模型在$T$里面应用，最终发现有90个样本分类错误，那么错误率九尾 $(90/300)\times100 \%=30 \%)$,相应的精度为$1-30 \% = 70 \%$.</p>
 <p>在留出法中需要注意以下三点：</p>
-<ul>
+<ol>
 <li><p>要注意在训练集合测试集中保持数据分布的一致性，避免因为数据划分过程引入额外的偏差队最终结果造成影响，比如上面的集合D中包含500个正例和500个反例，那么700个样本组成的训练集中就包含350个正例和350个反例，同样的测试集中就包含150个正例和150个反例。</p>
 </li>
 <li><p>要注意就算数据在总体数据集、训练集和测试集中分布一致，但是是存在很多种划分方法，这个时候会对某些特征的权重产生影响。解决这个问题的办法就是进行多次划分，多次训练，多次测试。比如进行100次随机划分（保持一致性），然后得到100个结果，最终返回这100个结果的平均。</p>
 </li>
 <li><p>最后一个需要注意的问题是，因为D被分为了S和T，如果T的占比及较大，训练得到的模型可能更接近于D的模型，而T又太小，评估结果明显不可靠。如果T中多包涵一些样本，相应的S就得减少，最后训练出来的模型可能和D的模型有比较大的差别，从而降低了评估结果的保真性。对于这个问题，没有完美的解决方案，一般的做法是将大约2/3到4/5的样本用于训练，其他的用来测试。 </p>
 </li>
-</ul>
-<h4 id="交叉验证法"><a href="#交叉验证法" class="headerlink" title="交叉验证法"></a>交叉验证法</h4><p>交叉验证法是把数据集分为k个大小相似的互斥子集，然后每次用低k个子集作为测试器，其他的子集作为训练集。这样循环下去最终会进行k次训练和k次测试，最后返回k个测试结果的均值。通常这个方法也被称作为k交叉验证。<br>$$ D = D_1 \cup D_2 \cup D_3 \cdots  \cup D_k, D_i \cap D_j \neq \emptyset(i \neq j) .$$</p>
+</ol>
+<h3 id="交叉验证法"><a href="#交叉验证法" class="headerlink" title="交叉验证法"></a>交叉验证法</h3><p>交叉验证法是把数据集分为k个大小相似的互斥子集，然后每次用低k个子集作为测试器，其他的子集作为训练集。这样循环下去最终会进行k次训练和k次测试，最后返回k个测试结果的均值。通常这个方法也被称作为k交叉验证。<br>$$ D = D_1 \cup D_2 \cup D_3 \cdots  \cup D_k, D_i \cap D_j \neq \emptyset(i \neq j) .$$</p>
 <p>需要注意的问题：</p>
-<ul>
-<li>与留出法一样，也需要保持数据分布的一致性。</li>
-<li>k的取值，常见的有10次10折交叉验证，也就是k=10</li>
+<ol>
+<li><p>与留出法一样，也需要保持数据分布的一致性。</p>
+</li>
+<li><p>k的取值，常见的有10次10折交叉验证，也就是k=10</p>
+</li>
 <li><p>如果数据的样本数m和分成的子集数量k相等，这个时候每一个测试集其实只有一个样本，这种方法也被称为留一法，往往留一法被认为比较准确，但是换来的结果是开销会非常大，再者结果也未必精确，因为NFL定理在这里同样适用。</p>
-<h4 id="自助法"><a href="#自助法" class="headerlink" title="自助法"></a>自助法</h4><p>自助法对于包含m个样本的数据集$D$，对它进行采样产生数据集$D^2’$,每次一从D中随机挑选一个样本，将其拷贝放入$D^2’$，然后再把这个样本放回到$D$中，是的样本在下次采样的时候让然能够被采集到；把这个过程重复执行m次之后，就得到了包含m个样本数据$D^1’$ ，这样做的结果是$D$中会有一部分样本在$D^1’$中多次出现，而另一部分不出现。而样本在$m$次采集中始终不被采集到的概率是$(1-\frac{1}{m})^m$,取极限得到：<br>$$\lim_{m\rightarrow+\infty} (1-\frac{1}{m})^m\rightarrow \frac{1}{m} \approx 0.368$$</p>
 </li>
-</ul>
-<p>于是，我们可以将$D^1’$用作训练集，$D - D^1’$用作测试集；这样实际评估的模型和期望评估的模型都是用m个训练样本，而我们仍有数据总量越$1/3$的、没在训练集中出现的样本用于测试，这样的测试结果，也称作“包外估计”。</p>
+</ol>
+<h3 id="自助法"><a href="#自助法" class="headerlink" title="自助法"></a>自助法</h3><p>自助法对于包含m个样本的数据集$D$，对它进行采样产生数据集$D\prime$,每次一从D中随机挑选一个样本，将其拷贝放入$D\prime$，然后再把这个样本放回到$D$中，是的样本在下次采样的时候让然能够被采集到；把这个过程重复执行m次之后，就得到了包含m个样本数据$D\prime$ ，这样做的结果是$D$中会有一部分样本在$D\prime$中多次出现，而另一部分不出现。而样本在$m$次采集中始终不被采集到的概率是$(1-\frac{1}{m})^m$,取极限得到：<br>$$\lim_{m\rightarrow+\infty} (1-\frac{1}{m})^m\rightarrow \frac{1}{m} \approx 0.368$$</p>
+<p>于是，我们可以将$D\prime$用作训练集，$D - D\prime$用作测试集；这样实际评估的模型和期望评估的模型都是用m个训练样本，而我们仍有数据总量越$1/3$的、没在训练集中出现的样本用于测试，这样的测试结果，也称作“包外估计”。</p>
 <p>要注意的问题：</p>
-<ul>
-<li>自助法在数据集比较小，难以有效划分训练集、测试集的时候很有用。同时，自助法能从初始数据集中产生多个不同的训练集。</li>
-<li><p>自助法产生的数据集改变了初始数据集的分布，会引入估计偏差，当数据量足够的时候留出法和交叉验证法更常用一些。</p>
-<h3 id="性能度量"><a href="#性能度量" class="headerlink" title="性能度量"></a>性能度量</h3><p>对机器学习的泛化性能进行评估，除了上面的评估其误差外，还需要去评估其能力，这就是性能度量。误差和能力是两回事，对于分类问题，误差也许和能力就是一回事，但对于回归问题，除了评估误差外还要评估其能力，也就是预测的数值到底和原是数值有多接近。</p>
-<p>在预测任务中，给定样例集$D={(x_1,y_1), (x_2,y_2),\cdots ,(x_m,y_m) }$，其中$y_i$是实例$x_i$的真实标记，要评估学习器$f$的性能，就要把学习器预测结果$f(x)$与真实标记$y$作比较。</p>
-<h4 id="均方误差-mean-squared-error"><a href="#均方误差-mean-squared-error" class="headerlink" title="均方误差(mean squared error)"></a>均方误差(mean squared error)</h4><p>回归任务最常用的性能度量是均方误差（方差的平均数）：<br>$$E(f;D) = \frac{1}{m} \sum_{i=1}^{m}(f(x_i)-y)^2$$<br>更一般的，对于数据分布$D$和概率密度函数$p(*),均方误差可以描述为$<br>$$E(f;D) = \int_{x-D}(f(x)-y)^2p(x)dx$$</p>
+<ol>
+<li><p>自助法在数据集比较小，难以有效划分训练集、测试集的时候很有用。同时，自助法能从初始数据集中产生多个不同的训练集。</p>
 </li>
-</ul>
-<h4 id="错误率与精度"><a href="#错误率与精度" class="headerlink" title="错误率与精度"></a>错误率与精度</h4><p>错误率可以定义为：<br>$$E(f;D) = \frac{1}{M} \sum_{i=1}^{m} \amalg(f(x_i)\neq y_i)  $$<br>精度可以定义为：<br>$$add(f;D) = \frac{1}{M} \sum_{i=1}^{m} \amalg(f(x_i) = y_i) $$<br>$$ 1 - E(f;D) $$</p>
-<h4 id="查准率、查全率与F1"><a href="#查准率、查全率与F1" class="headerlink" title="查准率、查全率与Ｆ1"></a>查准率、查全率与Ｆ1</h4><p>错误率与精度虽然常用，但不能满足所有任务需求。比如，在一个人工智能看病的模型中，错误率衡量的是有多少比例的人的身体状况被判别错误，但是我们关心的是“有多少有病的人被诊断出来没有病”，那么错误率显然不够用了。查准率与查全率则更适应于此类场景。</p>
+<li><p>自助法产生的数据集改变了初始数据集的分布，会引入估计偏差，当数据量足够的时候留出法和交叉验证法更常用一些。</p>
+</li>
+</ol>
+<h2 id="性能度量"><a href="#性能度量" class="headerlink" title="性能度量"></a>性能度量</h2><p>对机器学习的泛化性能进行评估，除了上面的评估其误差外，还需要去评估其能力，这就是性能度量。误差和能力是两回事，对于分类问题，误差也许和能力就是一回事，但对于回归问题，除了评估误差外还要评估其能力，也就是预测的数值到底和原是数值有多接近。</p>
+<p>在预测任务中，给定样例集$D={(x_1,y_1), (x_2,y_2),\cdots ,(x_m,y_m) }$，其中$y_i$是实例$x_i$的真实标记，要评估学习器$f$的性能，就要把学习器预测结果$f(x)$与真实标记$y$作比较。</p>
+<h3 id="均方误差-mean-squared-error"><a href="#均方误差-mean-squared-error" class="headerlink" title="均方误差(mean squared error)"></a>均方误差(mean squared error)</h3><p>回归任务最常用的性能度量是均方误差（方差的平均数）：<br>$$E(f;D) = \frac{1}{m} \sum_{i=1}^{m}(f(x_i)-y)^2$$<br>更一般的，对于数据分布$D$和概率密度函数$p(*),均方误差可以描述为$<br>$$E(f;D) = \int_{x-D}(f(x)-y)^2p(x)dx$$</p>
+<h3 id="错误率与精度"><a href="#错误率与精度" class="headerlink" title="错误率与精度"></a>错误率与精度</h3><p>错误率可以定义为：<br>$$E(f;D) = \frac{1}{M} \sum_{i=1}^{m} \amalg(f(x_i)\neq y_i)  $$<br>精度可以定义为：<br>$$add(f;D) = \frac{1}{M} \sum_{i=1}^{m} \amalg(f(x_i) = y_i) $$<br>$$ 1 - E(f;D) $$</p>
+<h3 id="查准率、查全率与F1"><a href="#查准率、查全率与F1" class="headerlink" title="查准率、查全率与Ｆ1"></a>查准率、查全率与Ｆ1</h3><p>错误率与精度虽然常用，但不能满足所有任务需求。比如，在一个人工智能看病的模型中，错误率衡量的是有多少比例的人的身体状况被判别错误，但是我们关心的是“有多少有病的人被诊断出来没有病”，那么错误率显然不够用了。查准率与查全率则更适应于此类场景。</p>
 <blockquote>
 <p>　未完待续</p>
 </blockquote>
@@ -360,7 +363,7 @@
         <p><span>本文标题:</span><a href="/2018/07/08/模型的评估与选择/">模型的评估与选择</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Andy</a></p>
         <p><span>发布时间:</span>2018-07-08, 19:24:47</p>
-        <p><span>最后更新:</span>2018-07-09, 00:36:13</p>
+        <p><span>最后更新:</span>2018-07-09, 00:48:33</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2018/07/08/模型的评估与选择/" title="模型的评估与选择">http://mazingan.github.io/2018/07/08/模型的评估与选择/</a>
             <span class="copy-path" data-clipboard-text="原文: http://mazingan.github.io/2018/07/08/模型的评估与选择/　　作者: Andy" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -390,7 +393,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#经验误差与过拟合"><span class="toc-number">1.</span> <span class="toc-text">经验误差与过拟合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#评估方法"><span class="toc-number">2.</span> <span class="toc-text">评估方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#留出法（hold-out）"><span class="toc-number">2.1.</span> <span class="toc-text">留出法（hold-out）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#交叉验证法"><span class="toc-number">2.2.</span> <span class="toc-text">交叉验证法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#自助法"><span class="toc-number">2.3.</span> <span class="toc-text">自助法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#性能度量"><span class="toc-number">3.</span> <span class="toc-text">性能度量</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#均方误差-mean-squared-error"><span class="toc-number">3.1.</span> <span class="toc-text">均方误差(mean squared error)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#错误率与精度"><span class="toc-number">3.2.</span> <span class="toc-text">错误率与精度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#查准率、查全率与F1"><span class="toc-number">3.3.</span> <span class="toc-text">查准率、查全率与Ｆ1</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#经验误差与过拟合"><span class="toc-number">1.</span> <span class="toc-text">经验误差与过拟合</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#评估方法"><span class="toc-number">2.</span> <span class="toc-text">评估方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#留出法（hold-out）"><span class="toc-number">2.1.</span> <span class="toc-text">留出法（hold-out）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#交叉验证法"><span class="toc-number">2.2.</span> <span class="toc-text">交叉验证法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#自助法"><span class="toc-number">2.3.</span> <span class="toc-text">自助法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#性能度量"><span class="toc-number">3.</span> <span class="toc-text">性能度量</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#均方误差-mean-squared-error"><span class="toc-number">3.1.</span> <span class="toc-text">均方误差(mean squared error)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#错误率与精度"><span class="toc-number">3.2.</span> <span class="toc-text">错误率与精度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查准率、查全率与F1"><span class="toc-number">3.3.</span> <span class="toc-text">查准率、查全率与Ｆ1</span></a></li></ol></li></ol>
         
     </div>
     <style>
