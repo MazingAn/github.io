@@ -23,7 +23,7 @@
 <meta property="og:site_name" content="Andy&#39;s Blog">
 <meta property="og:description" content="在人类世界里有 “吾日三省吾身”、“知错能改，善莫大焉”、“温故而知新，可以为师矣”这些话。这些话都是人类取回顾过去发生的事情，通过发生过的事务去总结经验或者从旧的事务中总结规律。总之，这是几十万年来人类一直都具备的天性，我们称之为人类的学习。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-08T08:30:47.229Z">
+<meta property="og:updated_time" content="2018-07-08T11:24:23.001Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习的基本概念和术语">
 <meta name="twitter:description" content="在人类世界里有 “吾日三省吾身”、“知错能改，善莫大焉”、“温故而知新，可以为师矣”这些话。这些话都是人类取回顾过去发生的事情，通过发生过的事务去总结经验或者从旧的事务中总结规律。总之，这是几十万年来人类一直都具备的天性，我们称之为人类的学习。">
@@ -324,6 +324,13 @@
 <p>对于分类问题:按照类别的数量区分有二分类任务和多分类任务.<br>如果只涉及两个类别的分类，这中分类被称为　<strong>二分类 (binary classifation)</strong>, 通常成其中一个分类为 <strong>正类(positive class)</strong>, 另一个自然就是 <strong>反类（negative class）</strong>; 对于二分类任务,得到的结果,通常是让 $Y={-1,+1}$ 或者 ${0, 1}$<br>如果设计多个类别的时候,则称为 <strong>多分类(multi-class classifation)</strong>.对于多分类任务$|Y| &gt; 2$.<br>由于回归问题得到的输出是连续纸,所以$Y=R$, R为实数集.</p>
 <h3 id="非监督学习"><a href="#非监督学习" class="headerlink" title="非监督学习"></a>非监督学习</h3><p>有些时候，参与训练的数据集并没有被标记，这个时候可以对这些数据进行 <strong>聚类(clustering)</strong>，这有点类似于google和百度的新闻页面，当打开页面之后很多新闻自动的被放置在了一个组内。 把训练集分成若干个组，这样的组被称为 <strong>簇(cluster)</strong>,这些自动形成的簇可以自动的对应一些潜在的概念划分，如军事新闻，政治新闻，娱乐八卦，但事实上我们并没有类似“军事新闻”、“政治新闻”这类的标记和概念。</p>
 <p>聚类是非监督学习的代表。</p>
+<h3 id="假设空间与假设的选择"><a href="#假设空间与假设的选择" class="headerlink" title="假设空间与假设的选择"></a>假设空间与假设的选择</h3><p>上面提到了假设 hypothesis, 事实上学习的目的就是为了得到一个预测模型，而在这个过程中我们需要不断地去尝试，提出假设，而所有假设的集合，被称为假设空间。换句话说：在对应的函数中，已知$x$,$y$,我们可以提出假设$h(x)=y$，那么所有的的$h(x)=y$的函数的集合，就是假设空间。</p>
+<p>但是当样本的维数特别大的时候，对应的假设空间也很大，我们几乎有无限个假设，到底应该选择哪一个假设呢？</p>
+<p>每一个假设坑能在预测中对不同的特征值有不同的权重，这个时候我们一般优先选择最简单的那个假设，换句话说就是排除一些不必要的特征的干扰，把复杂问题简单化。用函数来代表假设的话，按照上面的原则，函数应该尽量简单。上面的原则被称作“卡奥姆剃刀原则”，感觉提到这个词用的很形象哈（莫名回想起多年以前挥洒过热血的剃刀高地和剃刀沼泽）</p>
+<blockquote>
+<p>卡奥姆剃刀原则：若有多个假设与观察一致，则选择最简单的那个。</p>
+</blockquote>
+<p>但是，卡奥姆剃刀原则也并不是唯一可行的原则，到底什么样的模型更好，也就是算法的归纳和偏好是否与问题本身匹配，大部分时候直接决定了算法能否取得好的性能。到底如何却设计算法的归纳和偏好大部分时候取决于我们研究的问题，脱离实际单纯的去谈哪一个算法好，那一个算法不好本身就是不科学的（ＰＳ：天下没有免费的午餐定力<nfl>定力就证明了在所有问题同等重要的时候高明的算法也罢，笨拙的算法也好，他们的期望性是相同的）。</nfl></p>
 <blockquote>
 <p>本文是对周志华教授《机器学习》的学习笔记的整理和部分内容的摘录。</p>
 </blockquote>
@@ -338,7 +345,7 @@
         <p><span>本文标题:</span><a href="/2018/07/08/机器学习的基本概念和术语/">机器学习的基本概念和术语</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Andy</a></p>
         <p><span>发布时间:</span>2018-07-08, 14:38:28</p>
-        <p><span>最后更新:</span>2018-07-08, 16:30:47</p>
+        <p><span>最后更新:</span>2018-07-08, 19:24:23</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2018/07/08/机器学习的基本概念和术语/" title="机器学习的基本概念和术语">http://mazingan.github.io/2018/07/08/机器学习的基本概念和术语/</a>
             <span class="copy-path" data-clipboard-text="原文: http://mazingan.github.io/2018/07/08/机器学习的基本概念和术语/　　作者: Andy" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -352,6 +359,12 @@
 
 
     <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2018/07/08/模型的评估与选择/">
+                    模型的评估与选择
+                </a>
+            </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
@@ -368,7 +381,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#为什么我会选择机器学习"><span class="toc-number">1.</span> <span class="toc-text">为什么我会选择机器学习</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是机器学习"><span class="toc-number">2.</span> <span class="toc-text">什么是机器学习</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#机器学习的数据和术语"><span class="toc-number">3.</span> <span class="toc-text">机器学习的数据和术语</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#监督学习：离散和连续-分类与回归"><span class="toc-number">4.</span> <span class="toc-text">监督学习：离散和连续,分类与回归</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#非监督学习"><span class="toc-number">5.</span> <span class="toc-text">非监督学习</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#为什么我会选择机器学习"><span class="toc-number">1.</span> <span class="toc-text">为什么我会选择机器学习</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是机器学习"><span class="toc-number">2.</span> <span class="toc-text">什么是机器学习</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#机器学习的数据和术语"><span class="toc-number">3.</span> <span class="toc-text">机器学习的数据和术语</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#监督学习：离散和连续-分类与回归"><span class="toc-number">4.</span> <span class="toc-text">监督学习：离散和连续,分类与回归</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#非监督学习"><span class="toc-number">5.</span> <span class="toc-text">非监督学习</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#假设空间与假设的选择"><span class="toc-number">6.</span> <span class="toc-text">假设空间与假设的选择</span></a></li></ol>
         
     </div>
     <style>
@@ -424,7 +437,9 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+            <a href="/2018/07/08/模型的评估与选择/" title="上一篇: 模型的评估与选择">
+                <i class="fa fa-angle-left"></i>
+            </a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
@@ -436,7 +451,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/07/08/机器学习的基本概念和术语/">机器学习的基本概念和术语</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/07/python经典面试题收录/">python经典面试题收录</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/02/直线、面、相交和高斯消元/">直线、面、相交和高斯消元</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/01/向量的基本知识和原理/">向量的基本知识和原理</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/01/Who-Are-You-You-Are-Every-Single-Day/">Who Are You, You Are Every Single Day.</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/28/算法基础——基本排序算法/">算法基础——基本排序算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/27/python语言特性之引用/">python语言特性之引用</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/27/使用namedtupe构建没有方法的对象/">使用namedtupe构建没有方法的对象</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/27/关于Django的CSRF和跨域访问机制/">关于Django的CSRF和跨域访问机制</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/27/基于面部识别的日志系统的设计与实现/">基于面部识别的日志系统的设计与实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/27/直播平台概述和直播服务器架设-md/">直播平台概述和直播服务器架设.md</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/27/读《岛上书店》和《无声告白》有感/">读《岛上书店》和《无声告白》有感</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/07/08/模型的评估与选择/">模型的评估与选择</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/08/机器学习的基本概念和术语/">机器学习的基本概念和术语</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/07/python经典面试题收录/">python经典面试题收录</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/02/直线、面、相交和高斯消元/">直线、面、相交和高斯消元</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/01/向量的基本知识和原理/">向量的基本知识和原理</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/01/Who-Are-You-You-Are-Every-Single-Day/">Who Are You, You Are Every Single Day.</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/28/算法基础——基本排序算法/">算法基础——基本排序算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/27/python语言特性之引用/">python语言特性之引用</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/27/使用namedtupe构建没有方法的对象/">使用namedtupe构建没有方法的对象</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/27/关于Django的CSRF和跨域访问机制/">关于Django的CSRF和跨域访问机制</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/27/基于面部识别的日志系统的设计与实现/">基于面部识别的日志系统的设计与实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/27/直播平台概述和直播服务器架设-md/">直播平台概述和直播服务器架设.md</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/27/读《岛上书店》和《无声告白》有感/">读《岛上书店》和《无声告白》有感</a></li></ul>
 
 
 
