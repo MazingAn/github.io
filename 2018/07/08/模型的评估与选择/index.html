@@ -23,7 +23,7 @@
 <meta property="og:site_name" content="Andy&#39;s Blog">
 <meta property="og:description" content="对一类问题，机器学习的算法层出不穷，得出的模型也各有千秋，那么到底应该选择什么样的模型呢？我们需要进行模型评估。我们可以把要解决的问题看作是一辆破损的汽车，解决问题的模型看作是扳手、钳子之类的工具，用不同的工具去维修这辆破损的汽车会得到不同的结果，要去判断这个结果的好坏就需要使用测量工具来评估，也许我们要用量角器、也许直接使用直尺，这就要根据情况而定了。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-08T16:48:33.158Z">
+<meta property="og:updated_time" content="2018-07-08T16:53:32.321Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="模型的评估与选择">
 <meta name="twitter:description" content="对一类问题，机器学习的算法层出不穷，得出的模型也各有千秋，那么到底应该选择什么样的模型呢？我们需要进行模型评估。我们可以把要解决的问题看作是一辆破损的汽车，解决问题的模型看作是扳手、钳子之类的工具，用不同的工具去维修这辆破损的汽车会得到不同的结果，要去判断这个结果的好坏就需要使用测量工具来评估，也许我们要用量角器、也许直接使用直尺，这就要根据情况而定了。">
@@ -347,7 +347,7 @@
 <h2 id="性能度量"><a href="#性能度量" class="headerlink" title="性能度量"></a>性能度量</h2><p>对机器学习的泛化性能进行评估，除了上面的评估其误差外，还需要去评估其能力，这就是性能度量。误差和能力是两回事，对于分类问题，误差也许和能力就是一回事，但对于回归问题，除了评估误差外还要评估其能力，也就是预测的数值到底和原是数值有多接近。</p>
 <p>在预测任务中，给定样例集$D={(x_1,y_1), (x_2,y_2),\cdots ,(x_m,y_m) }$，其中$y_i$是实例$x_i$的真实标记，要评估学习器$f$的性能，就要把学习器预测结果$f(x)$与真实标记$y$作比较。</p>
 <h3 id="均方误差-mean-squared-error"><a href="#均方误差-mean-squared-error" class="headerlink" title="均方误差(mean squared error)"></a>均方误差(mean squared error)</h3><p>回归任务最常用的性能度量是均方误差（方差的平均数）：<br>$$E(f;D) = \frac{1}{m} \sum_{i=1}^{m}(f(x_i)-y)^2$$<br>更一般的，对于数据分布$D$和概率密度函数$p(*),均方误差可以描述为$<br>$$E(f;D) = \int_{x-D}(f(x)-y)^2p(x)dx$$</p>
-<h3 id="错误率与精度"><a href="#错误率与精度" class="headerlink" title="错误率与精度"></a>错误率与精度</h3><p>错误率可以定义为：<br>$$E(f;D) = \frac{1}{M} \sum_{i=1}^{m} \amalg(f(x_i)\neq y_i)  $$<br>精度可以定义为：<br>$$add(f;D) = \frac{1}{M} \sum_{i=1}^{m} \amalg(f(x_i) = y_i) $$<br>$$ 1 - E(f;D) $$</p>
+<h3 id="错误率与精度"><a href="#错误率与精度" class="headerlink" title="错误率与精度"></a>错误率与精度</h3><p>错误率可以定义为：<br>$$E(f;D) = \frac{1}{M} \sum_{i=1}^{m} \amalg(f(x_i)\neq y_i)  $$<br>精度可以定义为：<br>$$add(f;D) = \frac{1}{M} \sum_{i=1}^{m} \amalg(f(x_i) = y_i) $$<br>$$ =1 - E(f;D) $$</p>
 <h3 id="查准率、查全率与F1"><a href="#查准率、查全率与F1" class="headerlink" title="查准率、查全率与Ｆ1"></a>查准率、查全率与Ｆ1</h3><p>错误率与精度虽然常用，但不能满足所有任务需求。比如，在一个人工智能看病的模型中，错误率衡量的是有多少比例的人的身体状况被判别错误，但是我们关心的是“有多少有病的人被诊断出来没有病”，那么错误率显然不够用了。查准率与查全率则更适应于此类场景。</p>
 <blockquote>
 <p>　未完待续</p>
@@ -363,7 +363,7 @@
         <p><span>本文标题:</span><a href="/2018/07/08/模型的评估与选择/">模型的评估与选择</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Andy</a></p>
         <p><span>发布时间:</span>2018-07-08, 19:24:47</p>
-        <p><span>最后更新:</span>2018-07-09, 00:48:33</p>
+        <p><span>最后更新:</span>2018-07-09, 00:53:32</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2018/07/08/模型的评估与选择/" title="模型的评估与选择">http://mazingan.github.io/2018/07/08/模型的评估与选择/</a>
             <span class="copy-path" data-clipboard-text="原文: http://mazingan.github.io/2018/07/08/模型的评估与选择/　　作者: Andy" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
