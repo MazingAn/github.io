@@ -1494,16 +1494,20 @@ body .ui-tooltip {
 .article-entry li ol {
   margin-left: 30px;
 }
-.article-entry ul > li {
-  list-style: none;
-  margin: 0;
+.article-entry ul > li:before {
+  content: "";
+  background: #dedede;
 }
 .article-entry ul > li:before {
-  content: '\f0a9';
-  font-family: FontAwesome;
-  font-size: 0.8em;
+  display: inline-block;
+  content: "";
+  width: 0.4em;
+  height: 0.4em;
   margin-right: 0.5em;
-  color: #c8c8c8;
+  margin-bottom: 0.11em;
+  border: 1px solid #d3d3d3;
+  border-radius: 50%;
+  background: #d3d3d3;
 }
 .article-entry h1 {
   margin-top: 30px;
@@ -2238,9 +2242,9 @@ aside.comment-bar:active {
   border-radius: 3px;
   -webkit-box-shadow: 1px 1px 1px rgba(0,0,0,0.08);
   box-shadow: 1px 1px 1px rgba(0,0,0,0.08);
-  var: 1;
+  var: 0;
   color: #fff;
-  background: rgba(153,204,153,0.7);
+  color: #808080;
 }
 pre .comment,
 pre .title {
@@ -2342,6 +2346,56 @@ pre .javascript .function {
 #footer .visit #site-visit:hover .fa,
 #footer .visit #page-visit:hover .fa {
   color: #333;
+}
+.share {
+  padding-left: 40px;
+  margin: 1em auto 0.5em;
+  opacity: 0.75;
+}
+.share:hover {
+  opacity: 1;
+}
+.bdsharebuttonbox a,
+.bdsharebuttonbox .bds_more {
+  width: 30px;
+  height: 30px !important;
+  line-height: 30px !important;
+  text-align: center;
+  padding-left: 0 !important;
+  font-size: 20.400000000000002px !important;
+  text-decoration: none;
+  color: #fff !important;
+  -webkit-box-shadow: 1px 1px 1px rgba(0,0,0,0.1), 1px 1px 1px rgba(0,0,0,0.3);
+  box-shadow: 1px 1px 1px rgba(0,0,0,0.1), 1px 1px 1px rgba(0,0,0,0.3);
+}
+.bdsharebuttonbox a:hover,
+.bdsharebuttonbox .bds_more:hover {
+  -webkit-transform: scale(1.1);
+  -moz-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  transform: scale(1.1);
+  color: #fff !important;
+}
+.bdsharebuttonbox .bds_tsina {
+  background: #db332f !important;
+}
+.bdsharebuttonbox .bds_sqq {
+  background: #1cbcef !important;
+}
+.bdsharebuttonbox .bds_copy {
+  background: #8f8f8f !important;
+}
+.bdsharebuttonbox .bds_mail {
+  background: #6fc0e4 !important;
+}
+.bdsharebuttonbox .bds_weixin {
+  background: #8cdc49 !important;
+}
+.bdsharebuttonbox .bds_more {
+  background: #8cbcf5 !important;
+}
+.bdsharebuttonbox .bds_twi {
+  background: #21abf4 !important;
 }
 #page-nav {
   text-align: center;
