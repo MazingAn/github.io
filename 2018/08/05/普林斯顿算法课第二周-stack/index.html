@@ -15,22 +15,18 @@
 
 
 
-<meta name="description" content="不会做直播还混什么互联网2016年国内各种直播应用如雨后春笋一般涌现出来，各大主打云服务的国内互联网巨头纷纷推出了自己的视频直播平台的解决方案，比较优秀的有七牛, 阿里的大视频解决方案,网易的云视频，当然腾讯也不甘落后，推出了类似的视频云。 事实上，网络直播由来已久，但之所以会在2016年一下子火起来，我觉得一是短视频社区的火爆带动了整个视频行业，促成了网络直播的流行。再者，大部分人通过早期的微信">
-<meta name="keywords" content="流媒体,nginx-rtmp,网络直播">
+<meta name="description" content="在日常工作中，我们经常会需要用到集合，但是一个有一个必须要考虑的问题是，集合中的元素应该怎么置入和移除，stack和queue就是这个问题的描述，本文根据课程内容，给出了stack的两种实现方法。">
+<meta name="keywords" content="普林斯顿算法课">
 <meta property="og:type" content="article">
-<meta property="og:title" content="直播平台概述和直播服务器架设.md">
-<meta property="og:url" content="http://mazingan.github.io/2018/06/27/直播平台概述和直播服务器架设-md/index.html">
+<meta property="og:title" content="普林斯顿算法课第二周:stack">
+<meta property="og:url" content="http://mazingan.github.io/2018/08/05/普林斯顿算法课第二周-stack/index.html">
 <meta property="og:site_name" content="Andy&#39;s Blog">
-<meta property="og:description" content="不会做直播还混什么互联网2016年国内各种直播应用如雨后春笋一般涌现出来，各大主打云服务的国内互联网巨头纷纷推出了自己的视频直播平台的解决方案，比较优秀的有七牛, 阿里的大视频解决方案,网易的云视频，当然腾讯也不甘落后，推出了类似的视频云。 事实上，网络直播由来已久，但之所以会在2016年一下子火起来，我觉得一是短视频社区的火爆带动了整个视频行业，促成了网络直播的流行。再者，大部分人通过早期的微信">
+<meta property="og:description" content="在日常工作中，我们经常会需要用到集合，但是一个有一个必须要考虑的问题是，集合中的元素应该怎么置入和移除，stack和queue就是这个问题的描述，本文根据课程内容，给出了stack的两种实现方法。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://mazingan.github.io/2018/06/27/直播平台概述和直播服务器架设-md/1501506078827.png">
-<meta property="og:image" content="http://mazingan.github.io/2018/06/27/直播平台概述和直播服务器架设-md/1501507101583.png">
-<meta property="og:image" content="http://mazingan.github.io/2018/06/27/直播平台概述和直播服务器架设-md/1501510359019.png">
-<meta property="og:updated_time" content="2018-08-11T12:44:05.913Z">
+<meta property="og:updated_time" content="2018-08-11T13:00:56.040Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="直播平台概述和直播服务器架设.md">
-<meta name="twitter:description" content="不会做直播还混什么互联网2016年国内各种直播应用如雨后春笋一般涌现出来，各大主打云服务的国内互联网巨头纷纷推出了自己的视频直播平台的解决方案，比较优秀的有七牛, 阿里的大视频解决方案,网易的云视频，当然腾讯也不甘落后，推出了类似的视频云。 事实上，网络直播由来已久，但之所以会在2016年一下子火起来，我觉得一是短视频社区的火爆带动了整个视频行业，促成了网络直播的流行。再者，大部分人通过早期的微信">
-<meta name="twitter:image" content="http://mazingan.github.io/2018/06/27/直播平台概述和直播服务器架设-md/1501506078827.png">
+<meta name="twitter:title" content="普林斯顿算法课第二周:stack">
+<meta name="twitter:description" content="在日常工作中，我们经常会需要用到集合，但是一个有一个必须要考虑的问题是，集合中的元素应该怎么置入和移除，stack和queue就是这个问题的描述，本文根据课程内容，给出了stack的两种实现方法。">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -62,7 +58,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>直播平台概述和直播服务器架设.md | Andy&#39;s Blog</title>
+<title>普林斯顿算法课第二周:stack | Andy&#39;s Blog</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -269,11 +265,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-直播平台概述和直播服务器架设-md" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-普林斯顿算法课第二周-stack" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/06/27/直播平台概述和直播服务器架设-md/" class="article-date">
-      <time datetime="2018-06-27T13:25:46.000Z" itemprop="datePublished">2018-06-27</time>
+      <a href="/2018/08/05/普林斯顿算法课第二周-stack/" class="article-date">
+      <time datetime="2018-08-05T14:04:39.000Z" itemprop="datePublished">2018-08-05</time>
 </a>
 
 
@@ -288,7 +284,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      直播平台概述和直播服务器架设.md
+      普林斯顿算法课第二周:stack
     </h1>
   
 
@@ -299,7 +295,7 @@
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx-rtmp/">nginx-rtmp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/流媒体/">流媒体</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/网络直播/">网络直播</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/普林斯顿算法课/">普林斯顿算法课</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -309,64 +305,23 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h3 id="不会做直播还混什么互联网"><a href="#不会做直播还混什么互联网" class="headerlink" title="不会做直播还混什么互联网"></a>不会做直播还混什么互联网</h3><p>2016年国内各种直播应用如雨后春笋一般涌现出来，各大主打云服务的国内互联网巨头纷纷推出了自己的视频直播平台的解决方案，比较优秀的有<a href="http://www.qiniu.com" target="_blank" rel="noopener">七牛</a>, 阿里的<a href="https://www.aliyun.com/solution/media" target="_blank" rel="noopener">大视频解决方案</a>,网易的<a href="https://vcloud.163.com/live" target="_blank" rel="noopener">云视频</a>，当然腾讯也不甘落后，推出了类似的<a href="https://www.qcloud.com/product/ilvb" target="_blank" rel="noopener">视频云</a>。</p>
-<p>事实上，网络直播由来已久，但之所以会在2016年一下子火起来，我觉得一是短视频社区的火爆带动了整个视频行业，促成了网络直播的流行。再者，大部分人通过早期的微信公众号，微博等自媒体媒介尝到了甜头，网络直播片天地自然也不能放过。最后各类mooc在中国大地遍地开花，教育行业对直播也有相当需求。最后，事实上对于直播，国内具有相当的技术积累。</p>
+        <p>在日常工作中，我们经常会需要用到集合，但是一个有一个必须要考虑的问题是，集合中的元素应该怎么置入和移除，stack和queue就是这个问题的描述，本文根据课程内容，给出了stack的两种实现方法。</p>
 <a id="more"></a>
-<h3 id="网络直播的技术构架"><a href="#网络直播的技术构架" class="headerlink" title="网络直播的技术构架"></a>网络直播的技术构架</h3><p>往简单地说直播就是在自己的设备上采集音视频流然后推送到远程服务器再有远程服务器分发到网络中的客户端。</p>
-<p><img src="./1501506078827.png" alt="@这可能是历史上最粗线条的直播构架图"></p>
-<p>看上去很简陋，但是单就直播这个功能来说，他确实就是这么工作的，但是为了让大家看到更加高清的画面同时又能最大限度的满足部分用户可怜的带宽，编码工作就成了视频直播的重点。其次，不同的硬件的编码方式也不同，存在各种兼容性问题。同时，视频取流的客户端也需要做各种各样的播放器来满足不同设备。最要命的还有服务器端的网络分发，怎么寻找最短的路径用最快的时间把视频分发出去?最后，还有视频延时怎么才能降到最低，音视频的同步，直播的录像和回看和其引出的存储问题，权限问题，内容审核，用户体验，用户之间的即时消息，礼物系统等等一系列问题的引出，最终导致了直播系统变得异常复杂，于是就有了下图：<br><img src="./1501507101583.png" alt="@一个功能上基本够用的直播系统"></p>
-<h3 id="书归正传，先来谈谈直播服务器"><a href="#书归正传，先来谈谈直播服务器" class="headerlink" title="书归正传，先来谈谈直播服务器"></a>书归正传，先来谈谈直播服务器</h3><p>目前比较主流的直播协议有以下几种：</p>
+<h2 id="基础知识回顾"><a href="#基础知识回顾" class="headerlink" title="基础知识回顾"></a>基础知识回顾</h2><h3 id="stack"><a href="#stack" class="headerlink" title="stack"></a>stack</h3><p>stack是常用的一种数据结构，简单来说，stack是一种后进先出的数据结构。通常包含如下几个方法：</p>
 <ul>
-<li>RTMP（延迟低，适合对实时性要求比较高的情况）</li>
-<li>FLV OVER HTTP（延迟比RTMP高一点，来疯之类在用)</li>
-<li>HLS（高延迟，至少9秒左右，适合游戏直播，Twich好像用这个）</li>
+<li><p>pop: 移除stack最近增加的一个元素</p>
+</li>
+<li><p>push：增加一个元素到stack</p>
+</li>
+<li><p>isEmpy: 是否为空</p>
+</li>
+<li><p>size： 可选，返回包含的元素个数</p>
+</li>
 </ul>
-<p>怎么选择协议是一个让人头疼的问题，RTMP是Adobe开发出来的一套私有协议，适用于flash player 在PC端用起来比较爽，但是到了移动端则需要自己单独开发播放器；HTTP-FLV，同样依赖于flash player延时排第二，同样不能原生支持移动端，但其本质上使用的是HTTP协议传输；HLS则可以原生支持手机端，不过，延时较大。</p>
-<p>最终，尽管Adobe已经正是声明将在2020年停止开发FLASH，但是这也并不影响我使用rtmp协议，谁让网络上rtmp的资料比较多呢。</p>
-<h3 id="RTMP服务器"><a href="#RTMP服务器" class="headerlink" title="RTMP服务器"></a>RTMP服务器</h3><p>目前主流的RTMP服务器又有下面这么几种（这是要逼死选择困难户啊）：<br>1.开源系统：</p>
-<ul>
-<li>Red5</li>
-<li>Live555</li>
-<li>RtmpD</li>
-<li>EasyDarwin</li>
-<li>FFServer<br>2.商用系统</li>
-<li>NTV Media Server G3</li>
-<li>Flash Media Server5</li>
-<li>Windows Media Server</li>
-</ul>
-<p>商用系统，额，基本上不用考虑了，像我这种个人开发者。。。<br>然后，开源系统也果断一个都没有选，最后选择了nginx-rtmp.因为我的直播系统并没有多么复杂，说是直播，实际上是想做一个导播台！</p>
-<h3 id="nginx-rtmp安装"><a href="#nginx-rtmp安装" class="headerlink" title="nginx-rtmp安装"></a>nginx-rtmp安装</h3><p>nginx-rtmp 事实上只是nginx的一个模块，而且并没有在nginx官方版本内集成，需要在安装nginx的时候同是编译这个模块进去。</p>
-<p>具体的安装方法，按照一般的套路，首先是下载，然后是编译和安装，最后是配置。</p>
-<p>首先，需要分别下载nginx服务器和对应的插件 nginx-rtmp-module.</p>
-<blockquote>
-<p><code>wget https://nginx.org/download/nginx-1.12.1.tar.gz</code><br><code>git clone git://github.com/arut/nginx-rtmp-module.git</code><br><code>tar xzf nginx-1.12.0.tar.gz</code><br><code>cd nginx-1.12.0</code></p>
-</blockquote>
-<p>然后，进行编译安装：</p>
-<blockquote>
-<p><code>sudo ./configure --with-http_ssl_module --add-module=../nginx-rtmp-module</code><br>    <code>sudo make</code><br>    <code>sudo make install</code></p>
-</blockquote>
-<p>至此，编译安装完成！家下来启动nginx服务器：</p>
-<blockquote>
-<p><code>sudo /usr/local/nginx/sbin/nginx</code></p>
-</blockquote>
-<p>设置nginx服务器的直播流</p>
-<blockquote>
-<p><code>sudo vi /usr/local/nginx/conf/nginx.conf</code></p>
-</blockquote>
-<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">error_log  logs/error.log debug;</span><br><span class="line">    </span><br><span class="line">events &#123;</span><br><span class="line">    worker_connections  <span class="number">1024</span>;</span><br><span class="line">&#125;</span><br><span class="line">http &#123;</span><br><span class="line">    include       mime.types;</span><br><span class="line">    default_type  application/octet-stream;</span><br><span class="line"></span><br><span class="line">    sendfile        on;</span><br><span class="line">    keepalive_timeout  <span class="number">65</span>;</span><br><span class="line"></span><br><span class="line">    server &#123;</span><br><span class="line">        listen       <span class="number">8080</span>;</span><br><span class="line">        server_name  localhost;</span><br><span class="line"></span><br><span class="line">        <span class="comment"># rtmp stat</span></span><br><span class="line">        location /stat &#123;</span><br><span class="line">            rtmp_stat all;</span><br><span class="line">            rtmp_stat_stylesheet stat.xsl;</span><br><span class="line">        &#125;</span><br><span class="line">        location /stat.xsl &#123;</span><br><span class="line">            <span class="comment"># you can move stat.xsl to a different location</span></span><br><span class="line">            root /usr/build/nginx-rtmp-<span class="keyword">module</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment"># rtmp control</span></span><br><span class="line">        location /control &#123;</span><br><span class="line">            rtmp_control all;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        error_page   <span class="number">500</span> <span class="number">502</span> <span class="number">503</span> <span class="number">504</span>  /<span class="number">50</span>x.html;</span><br><span class="line">        location = /<span class="number">50</span>x.html &#123;</span><br><span class="line">            root   html;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">rtmp &#123;</span><br><span class="line">    server &#123;</span><br><span class="line">        listen <span class="number">1935</span>;</span><br><span class="line">        ping <span class="number">30</span>s;</span><br><span class="line">        notify_method get;</span><br><span class="line"></span><br><span class="line">        application myapp &#123;</span><br><span class="line">            live on;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>设置完成之后，重启nginx服务器：</p>
-<blockquote>
-<p><code>sudo /usr/local/nginx/sbin/nginx -s stop</code><br><code>sudo /usr/local/nginx/sbin/nginx</code></p>
-</blockquote>
-<p>最后准备一个MP4文件进行测试：<br>使用ffmpeg推送视频文件到服务器：</p>
-<blockquote>
-<p><code>ffmpeg -re -i /var/Videos/test.mp4 -c copy -f flv rtmp://localhost/myapp/mystream</code></p>
-</blockquote>
-<p>最后再访问我们的直播地址：</p>
-<blockquote>
-<p><code>ffplay rtmp://localhost/myapp/mystream</code></p>
-</blockquote>
-<p><img src="./1501510359019.png" alt="@完美运行！"></p>
+<p>使用链表实现stack：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.andy.stack;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LinkedStackOfString</span> </span>&#123;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * 使用链表的形式实现stack</span></span><br><span class="line"><span class="comment">     * stack的特点，后进先出</span></span><br><span class="line"><span class="comment">     * */</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Node first = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> size = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">Node</span></span>&#123;</span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">         * 链表的单个节点</span></span><br><span class="line"><span class="comment">         * item为当前值</span></span><br><span class="line"><span class="comment">         * next为下一个节点</span></span><br><span class="line"><span class="comment">         * */</span></span><br><span class="line">        String item;</span><br><span class="line">        Node next;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isEmpty</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> size == <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">pop</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">         * 出栈操作：去掉最第一个（栈顶）元素</span></span><br><span class="line"><span class="comment">         * 下一个元素成为第一个（栈顶）元素</span></span><br><span class="line"><span class="comment">         * */</span></span><br><span class="line">        String item = first.item;</span><br><span class="line">        first = first.next;</span><br><span class="line">        --size;</span><br><span class="line">        <span class="keyword">return</span> item;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">push</span><span class="params">(String item)</span></span>&#123;</span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">         * 入栈操作：增加一个元素，成为第一个（栈顶）元素</span></span><br><span class="line"><span class="comment">         * 先前的栈顶元素，变为第二个</span></span><br><span class="line"><span class="comment">         * */</span></span><br><span class="line">        Node oldFirst = first;</span><br><span class="line">        first = <span class="keyword">new</span> Node();</span><br><span class="line">        first.item = item;</span><br><span class="line">        first.next = oldFirst;</span><br><span class="line">        ++size;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">size</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> size;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用链表实现的stack，操作起来比较方便，但是每次都需要创建新的对象，开销比较大，使用数组实现stack则可以避免过多的开销。</p>
+<p>使用数组实现stack:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.andy.stack;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Array;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ResizingArrayStackOfString</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    * stack使用数组来实现</span></span><br><span class="line"><span class="comment">    * 当前栈顶元素下表为N</span></span><br><span class="line"><span class="comment">    * push操作时 设置N+1为要插入的元素 N自增</span></span><br><span class="line"><span class="comment">    * pop操作时 设置N为null N减小1</span></span><br><span class="line"><span class="comment">    * push操作中，如果数组越界，则扩充数组到原来的两倍大小</span></span><br><span class="line"><span class="comment">    * pop操作中，如果当前stack的大小为数组长度的1/4，则调整数组长度为原来的一半</span></span><br><span class="line"><span class="comment">    * */</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String[] s;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> N = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ResizingArrayStackOfString</span><span class="params">()</span></span>&#123;</span><br><span class="line">        s = <span class="keyword">new</span> String[<span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isEmpty</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> N == <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">push</span><span class="params">(String item)</span></span>&#123;</span><br><span class="line">        <span class="comment">//如果数组不够用啦，扩充一倍</span></span><br><span class="line">        <span class="keyword">if</span> ( N == s.length )&#123;</span><br><span class="line">            resize(s.length * <span class="number">2</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        s[N++] = item;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">pop</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">//pop操作，设当前N位置的元素为null</span></span><br><span class="line">        String item = s[N];</span><br><span class="line">        s[N] = <span class="keyword">null</span>;</span><br><span class="line">        N--;</span><br><span class="line">        <span class="comment">//如果当前stack只占数组的1/4，则舍弃数组后一半</span></span><br><span class="line">        <span class="keyword">if</span> ( N &gt; <span class="number">0</span> &amp;&amp; N == s.length/<span class="number">4</span>)</span><br><span class="line">            resize(s.length/<span class="number">2</span>);</span><br><span class="line">        <span class="keyword">return</span> item;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">resize</span><span class="params">(<span class="keyword">int</span> capacity)</span></span>&#123;</span><br><span class="line">        <span class="comment">//调整数组空间</span></span><br><span class="line">        String[] copy = <span class="keyword">new</span> String[capacity];</span><br><span class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.length; i++)</span><br><span class="line">            copy[i] = s[i];</span><br><span class="line">        s = copy;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -375,13 +330,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2018/06/27/直播平台概述和直播服务器架设-md/">直播平台概述和直播服务器架设.md</a></p>
+        <p><span>本文标题:</span><a href="/2018/08/05/普林斯顿算法课第二周-stack/">普林斯顿算法课第二周:stack</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Andy</a></p>
-        <p><span>发布时间:</span>2018-06-27, 21:25:46</p>
-        <p><span>最后更新:</span>2018-08-11, 20:44:05</p>
+        <p><span>发布时间:</span>2018-08-05, 22:04:39</p>
+        <p><span>最后更新:</span>2018-08-11, 21:00:56</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2018/06/27/直播平台概述和直播服务器架设-md/" title="直播平台概述和直播服务器架设.md">http://mazingan.github.io/2018/06/27/直播平台概述和直播服务器架设-md/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://mazingan.github.io/2018/06/27/直播平台概述和直播服务器架设-md/　　作者: Andy" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2018/08/05/普林斯顿算法课第二周-stack/" title="普林斯顿算法课第二周:stack">http://mazingan.github.io/2018/08/05/普林斯顿算法课第二周-stack/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://mazingan.github.io/2018/08/05/普林斯顿算法课第二周-stack/　　作者: Andy" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -393,16 +348,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2018/06/27/基于面部识别的日志系统的设计与实现/">
-                    基于面部识别的日志系统的设计与实现
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2018/06/27/读《岛上书店》和《无声告白》有感/">
-                    读《岛上书店》和《无声告白》有感
+                <a href="/2018/07/13/机器学习中对线性回归模型的检验与评估-sklearn实现/">
+                    机器学习中对线性回归模型的检验与评估(sklearn实现)
                 </a>
             </div>
         
@@ -414,7 +363,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#不会做直播还混什么互联网"><span class="toc-number">1.</span> <span class="toc-text">不会做直播还混什么互联网</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#网络直播的技术构架"><span class="toc-number">2.</span> <span class="toc-text">网络直播的技术构架</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#书归正传，先来谈谈直播服务器"><span class="toc-number">3.</span> <span class="toc-text">书归正传，先来谈谈直播服务器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RTMP服务器"><span class="toc-number">4.</span> <span class="toc-text">RTMP服务器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#nginx-rtmp安装"><span class="toc-number">5.</span> <span class="toc-text">nginx-rtmp安装</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#基础知识回顾"><span class="toc-number">1.</span> <span class="toc-text">基础知识回顾</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#stack"><span class="toc-number">1.1.</span> <span class="toc-text">stack</span></a></li></ol></li></ol>
         
     </div>
     <style>
@@ -445,15 +394,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2018/06/27/基于面部识别的日志系统的设计与实现/" title="上一篇: 基于面部识别的日志系统的设计与实现">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2018/06/27/读《岛上书店》和《无声告白》有感/" title="下一篇: 读《岛上书店》和《无声告白》有感">
+            <a href="/2018/07/13/机器学习中对线性回归模型的检验与评估-sklearn实现/" title="下一篇: 机器学习中对线性回归模型的检验与评估(sklearn实现)">
                 <i class="fa fa-angle-right"></i>
             </a>
         
