@@ -108,7 +108,7 @@
 
         
             <form id="search-form">
-            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="false" />
+            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="true" />
             <i class="fa fa-times" onclick="resetSearch()"></i>
             </form>
             <div id="local-search-result"></div>
@@ -323,7 +323,7 @@
 <p class="count"></p>
 
 <div class="tags">
-    <a href="/tags/django/" style="font-size: 16px; color: #808080">django</a> <a href="/tags/namedtuple/" style="font-size: 16px; color: #808080">namedtuple</a> <a href="/tags/nginx-rtmp/" style="font-size: 16px; color: #808080">nginx-rtmp</a> <a href="/tags/opencv/" style="font-size: 16px; color: #808080">opencv</a> <a href="/tags/pyqt/" style="font-size: 16px; color: #808080">pyqt</a> <a href="/tags/python/" style="font-size: 28.67px; color: #2b2b2b">python</a> <a href="/tags/信号处理/" style="font-size: 16px; color: #808080">信号处理</a> <a href="/tags/多线程/" style="font-size: 16px; color: #808080">多线程</a> <a href="/tags/媒体播放/" style="font-size: 16px; color: #808080">媒体播放</a> <a href="/tags/排序算法/" style="font-size: 16px; color: #808080">排序算法</a> <a href="/tags/普林斯顿算法课/" style="font-size: 16px; color: #808080">普林斯顿算法课</a> <a href="/tags/机器学习/" style="font-size: 28.67px; color: #2b2b2b">机器学习</a> <a href="/tags/机器学习基础/" style="font-size: 35px; color: #000">机器学习基础</a> <a href="/tags/流媒体/" style="font-size: 16px; color: #808080">流媒体</a> <a href="/tags/算法/" style="font-size: 16px; color: #808080">算法</a> <a href="/tags/算法基础/" style="font-size: 16px; color: #808080">算法基础</a> <a href="/tags/线性代数/" style="font-size: 22.33px; color: #555">线性代数</a> <a href="/tags/网络直播/" style="font-size: 16px; color: #808080">网络直播</a> <a href="/tags/西瓜书阅读笔记/" style="font-size: 16px; color: #808080">西瓜书阅读笔记</a> <a href="/tags/读书/" style="font-size: 22.33px; color: #555">读书</a> <a href="/tags/跨域访问/" style="font-size: 16px; color: #808080">跨域访问</a> <a href="/tags/面部识别/" style="font-size: 16px; color: #808080">面部识别</a> <a href="/tags/高斯消元/" style="font-size: 16px; color: #808080">高斯消元</a>
+    <a href="/tags/django/" style="font-size: 16px; color: #808080">django</a> <a href="/tags/namedtuple/" style="font-size: 16px; color: #808080">namedtuple</a> <a href="/tags/nginx-rtmp/" style="font-size: 16px; color: #808080">nginx-rtmp</a> <a href="/tags/opencv/" style="font-size: 16px; color: #808080">opencv</a> <a href="/tags/pyqt/" style="font-size: 16px; color: #808080">pyqt</a> <a href="/tags/python/" style="font-size: 28.67px; color: #2b2b2b">python</a> <a href="/tags/信号处理/" style="font-size: 16px; color: #808080">信号处理</a> <a href="/tags/多线程/" style="font-size: 16px; color: #808080">多线程</a> <a href="/tags/媒体播放/" style="font-size: 16px; color: #808080">媒体播放</a> <a href="/tags/排序算法/" style="font-size: 16px; color: #808080">排序算法</a> <a href="/tags/普林斯顿算法课/" style="font-size: 22.33px; color: #555">普林斯顿算法课</a> <a href="/tags/机器学习/" style="font-size: 28.67px; color: #2b2b2b">机器学习</a> <a href="/tags/机器学习基础/" style="font-size: 35px; color: #000">机器学习基础</a> <a href="/tags/流媒体/" style="font-size: 16px; color: #808080">流媒体</a> <a href="/tags/算法/" style="font-size: 16px; color: #808080">算法</a> <a href="/tags/算法基础/" style="font-size: 16px; color: #808080">算法基础</a> <a href="/tags/线性代数/" style="font-size: 22.33px; color: #555">线性代数</a> <a href="/tags/网络直播/" style="font-size: 16px; color: #808080">网络直播</a> <a href="/tags/西瓜书阅读笔记/" style="font-size: 16px; color: #808080">西瓜书阅读笔记</a> <a href="/tags/读书/" style="font-size: 22.33px; color: #555">读书</a> <a href="/tags/跨域访问/" style="font-size: 16px; color: #808080">跨域访问</a> <a href="/tags/面部识别/" style="font-size: 16px; color: #808080">面部识别</a> <a href="/tags/高斯消元/" style="font-size: 16px; color: #808080">高斯消元</a>
 </div>
 <style>
     .category-list li{
@@ -516,7 +516,7 @@ MathJax.Hub.Queue(function() {
             
             
             
-            
+             tags: ".article-tag a", 
             
             
              archives: ".archive-article-title", 
@@ -530,6 +530,23 @@ MathJax.Hub.Queue(function() {
         }
     
 </script>
+
+    <script>
+        var originTitle = document.title;
+        var titleTime;
+        document.addEventListener("visibilitychange", function() {
+            if (document.hidden) {
+                document.title = "(つェ⊂) 我藏好了哦~ " + originTitle;
+                clearTimeout(titleTime);
+            }
+            else {
+                document.title = "(*´∇｀*) 被你发现啦~ " + originTitle;
+                titleTime = setTimeout(function() {
+                    document.title = originTitle;
+                }, 2000);
+            }
+        })
+    </script>
 
 <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
 </script>

@@ -107,7 +107,7 @@
 
         
             <form id="search-form">
-            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="false" />
+            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="true" />
             <i class="fa fa-times" onclick="resetSearch()"></i>
             </form>
             <div id="local-search-result"></div>
@@ -272,6 +272,39 @@
           <a href="/archives/2018" class="archive-year">2018</a>
         </div>
         <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+          <div class="article-meta">
+              <a href="/2018/08/13/普林斯顿算法课第二周-queue/" class="archive-article-date">
+      <time datetime="2018-08-12T22:36:40.000Z" itemprop="datePublished">08-13</time>
+</a>
+
+
+        </div>
+         
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2018/08/13/普林斯顿算法课第二周-queue/">普林斯顿算法课第二周-queue</a>
+    </h1>
+  
+
+        <div class="article-info info-on-archive">
+          
+
+          
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/普林斯顿算法课/">普林斯顿算法课</a></li></ul>
+    </div>
+
+        </div>
+        <div class="clearfix"></div>
+    </header>
+  </div>
+</article>
+  
+    
     
     <article class="archive-article archive-type-post">
   <div class="archive-article-inner">
@@ -568,39 +601,6 @@
   </div>
 </article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2018/06/27/python语言特性之引用/" class="archive-article-date">
-      <time datetime="2018-06-27T14:03:12.000Z" itemprop="datePublished">06-27</time>
-</a>
-
-
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/06/27/python语言特性之引用/">python语言特性之引用</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
-          
-
-          
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
-    </div>
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
   
     </div></section>
   
@@ -701,7 +701,7 @@ MathJax.Hub.Queue(function() {
             
             
             
-            
+             tags: ".article-tag a", 
             
             
              archives: ".archive-article-title", 
@@ -715,6 +715,23 @@ MathJax.Hub.Queue(function() {
         }
     
 </script>
+
+    <script>
+        var originTitle = document.title;
+        var titleTime;
+        document.addEventListener("visibilitychange", function() {
+            if (document.hidden) {
+                document.title = "(つェ⊂) 我藏好了哦~ " + originTitle;
+                clearTimeout(titleTime);
+            }
+            else {
+                document.title = "(*´∇｀*) 被你发现啦~ " + originTitle;
+                titleTime = setTimeout(function() {
+                    document.title = originTitle;
+                }, 2000);
+            }
+        })
+    </script>
 
 <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
 </script>
