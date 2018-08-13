@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="Andy" />
+
+
+
+<meta name="description" content="对一类问题，机器学习的算法层出不穷，得出的模型也各有千秋，那么到底应该选择什么样的模型呢？我们需要进行模型评估。我们可以把要解决的问题看作是一辆破损的汽车，解决问题的模型看作是扳手、钳子之类的工具，用不同的工具去维修这辆破损的汽车会得到不同的结果，要去判断这个结果的好坏就需要使用测量工具来评估，也许我们要用量角器、也许直接使用直尺，这就要根据情况而定了。">
+<meta name="keywords" content="机器学习基础,机器学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="模型的评估与选择(第一部分)">
+<meta property="og:url" content="http://mazingan.github.io/2018/07/08/模型的评估与选择——上/index.html">
+<meta property="og:site_name" content="Andy&#39;s Blog">
+<meta property="og:description" content="对一类问题，机器学习的算法层出不穷，得出的模型也各有千秋，那么到底应该选择什么样的模型呢？我们需要进行模型评估。我们可以把要解决的问题看作是一辆破损的汽车，解决问题的模型看作是扳手、钳子之类的工具，用不同的工具去维修这辆破损的汽车会得到不同的结果，要去判断这个结果的好坏就需要使用测量工具来评估，也许我们要用量角器、也许直接使用直尺，这就要根据情况而定了。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://o8orq3ka2.bkt.clouddn.com/PR.png">
+<meta property="og:updated_time" content="2018-08-13T07:13:21.920Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="模型的评估与选择(第一部分)">
+<meta name="twitter:description" content="对一类问题，机器学习的算法层出不穷，得出的模型也各有千秋，那么到底应该选择什么样的模型呢？我们需要进行模型评估。我们可以把要解决的问题看作是一辆破损的汽车，解决问题的模型看作是扳手、钳子之类的工具，用不同的工具去维修这辆破损的汽车会得到不同的结果，要去判断这个结果的好坏就需要使用测量工具来评估，也许我们要用量角器、也许直接使用直尺，这就要根据情况而定了。">
+<meta name="twitter:image" content="http://o8orq3ka2.bkt.clouddn.com/PR.png">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="Andy&#39;s Blog" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>模型的评估与选择(第一部分) | Andy&#39;s Blog</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: true
+    }
+</script>
+
+
+    <script>
+        yiliaConfig.jquery_ui = [true, "//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js", "//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css"];
+    </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">Andy</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">机器学习/算法/python/数据可视化</p>
+        
+
+        
+            <form id="search-form">
+            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="true" />
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+            </form>
+            <div id="local-search-result"></div>
+            <p class='no-result'>No results found <i class='fa fa-spinner fa-pulse'></i></p>
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:andy2237@outlook.com" title="Email"></a>
+                            
+                                <a class="fa 简书" href="https://www.jianshu.com/u/3a0a7cae78b2" title="简书"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/django/">django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/namedtuple/">namedtuple</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx-rtmp/">nginx-rtmp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/opencv/">opencv</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pyqt/">pyqt</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/信号处理/">信号处理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/媒体播放/">媒体播放</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/排序算法/">排序算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/普林斯顿算法课/">普林斯顿算法课</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习基础/">机器学习基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/流媒体/">流媒体</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法基础/">算法基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/线性代数/">线性代数</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络直播/">网络直播</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/西瓜书阅读笔记/">西瓜书阅读笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/读书/">读书</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/跨域访问/">跨域访问</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面部识别/">面部识别</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高斯消元/">高斯消元</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://mazingan.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hacking-linux.com/">Kyle&#39;s Blog</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于python的全栈工程师,~专注于媳妇儿...</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">Andy</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">Andy</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">机器学习/算法/python/数据可视化</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:andy2237@outlook.com" title="Email"></a>
+                            
+                                <a class="fa 简书" target="_blank" href="https://www.jianshu.com/u/3a0a7cae78b2" title="简书"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-模型的评估与选择——上" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/07/08/模型的评估与选择——上/" class="article-date">
+      <time datetime="2018-07-08T11:24:47.000Z" itemprop="datePublished">2018-07-08</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      模型的评估与选择(第一部分)
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/机器学习/">机器学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/机器学习基础/">机器学习基础</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>对一类问题，机器学习的算法层出不穷，得出的模型也各有千秋，那么到底应该选择什么样的模型呢？我们需要进行模型评估。我们可以把要解决的问题看作是一辆破损的汽车，解决问题的模型看作是扳手、钳子之类的工具，用不同的工具去维修这辆破损的汽车会得到不同的结果，要去判断这个结果的好坏就需要使用测量工具来评估，也许我们要用量角器、也许直接使用直尺，这就要根据情况而定了。</p>
+<a id="more"></a>
+<h2 id="经验误差与过拟合"><a href="#经验误差与过拟合" class="headerlink" title="经验误差与过拟合"></a>经验误差与过拟合</h2><p>错误率（error rate）：我们通常把分类错误的样本数占样本总数的比例称为错误率。</p>
+<p>精度（accuracy）：精度等与１减去错误率。</p>
+<p>误差（error）：我们把机器学习的实际预测输出与样本的真实输出之间的差异称之为误差。</p>
+<p>训练误差(training error)：机器学习在训练集上的误差称之为训练误差。</p>
+<p>泛化误差（generaliztion error）：机器学习在新样本上的误差称之为泛化误差。</p>
+<p>很明显，我们希望得到泛化误差很小的学习器，但是由于不知道新样本是什么样的，所以只能尽量让训练误差最小。看上去这没什么问题，但是事实上凡事都需要有一个度，很多时候我们甚至能得到在训练集中分类错误率为０，精度为100%的学习器，但是大多数时候这样的模型并不好用。</p>
+<p>当学习器把训练样本学的太好了，很可能会把训练样本本身的特点当成了所有潜在样本的特点，事实上这些特点是训练样本所独有的，那么最终的泛化误差就会很大了，也就是说返回性能下降了，这种现象在机器学习中称作<strong>过拟合</strong>。与过拟合相对的是<strong>欠拟合</strong>，简单的来说，就是对训练样本的学习还不太到位。</p>
+<p>回到最开始的问题，很明显要评估一个模型是否适合解决此类问题最好的办法就是利用泛化误差，但是新样本到底是个什么鬼我们终究还是不知道的，也就无法得到泛化误差，而使用训练误差又会存在过拟合的问题，那么到底应该怎么去评估呢？</p>
+<h2 id="评估方法"><a href="#评估方法" class="headerlink" title="评估方法"></a>评估方法</h2><p>要得到泛化误差看上去不太可能，但是我们可以得到一个近似值。我们从已有数据集中抽出来一部分作为测试集，得到测试误差，把这个测试误差作为淡化误差的近似。简单来说，就是把训练集中的一部分数据当做训练集，还有一部分假装是未知样本，然后用这些样本来校验模型。需要注意的问题就是，这一部分被临时抽出来假扮路人的测试集，从头至尾都不可以参加训练。那么，对于一组数据集，又搞训练，有得客串测试，到底要怎么做呢？下面是几种常见的办法：</p>
+<h3 id="留出法（hold-out）"><a href="#留出法（hold-out）" class="headerlink" title="留出法（hold-out）"></a>留出法（hold-out）</h3><p>直接将数据集$D$分为两个互斥的集合，其中一个作为训练集$S$,另一个作为测试集$T$,他们满足如下关系：<br>$$D=S \cup T , S \cap T=\emptyset $$</p>
+<p>比如，$D$现在包含1000个样本，训练集$S$包含其中的700个样本，测试集$T$包含另外的300个样本，用$S$进行训练之后得到的模型在$T$里面应用，最终发现有90个样本分类错误，那么错误率就为 $(90/300)\times100 \%=30 \%)$,相应的精度为$1-30 \% = 70 \%$.</p>
+<p>在留出法中需要注意以下三点：</p>
+<ol>
+<li><p>要注意在训练集和测试集中保持数据分布的一致性，避免因为数据划分过程引入额外的偏差对最终结果造成影响，比如上面的集合D中包含500个正例和500个反例，那么700个样本组成的训练集中就应当包含350个正例和350个反例，同样的测试集中就应当包含150个正例和150个反例。</p>
+</li>
+<li><p>要注意就算数据在总体数据集、训练集和测试集中分布一致，但是是存在很多种划分方法，这个时候会对某些特征的权重产生影响。解决这个问题的办法就是进行多次划分，多次训练，多次测试。比如进行100次随机划分（同时保持一致性），然后会得到100个结果（测试误差），最终返回这100个结果的平均。</p>
+</li>
+<li><p>最后一个需要注意的问题是，因为D被分为了S和T，如果T的占比及较大，训练得到的模型可能更接近于D的模型，而T又太小，评估结果明显不可靠。如果T中多包涵一些样本，相应的S就得减少，最后训练出来的模型可能和D的模型有比较大的差别，从而降低了评估结果的保真性。对于这个问题，没有完美的解决方案，一般的做法是将大约2/3到4/5的样本用于训练，其他的用来测试。 </p>
+</li>
+</ol>
+<h3 id="交叉验证法"><a href="#交叉验证法" class="headerlink" title="交叉验证法"></a>交叉验证法</h3><p>交叉验证法是把数据集分为k个大小相似的互斥子集，然后每次用低k个子集作为测试器，其他的子集作为训练集。这样循环下去最终会进行k次训练和k次测试，最后返回k个测试结果的均值。通常这个方法也被称作为k交叉验证。<br>$$ D = D_1 \cup D_2 \cup D_3 \cdots  \cup D_k, D_i \cap D_j \neq \emptyset(i \neq j) .$$</p>
+<p>需要注意的问题：</p>
+<ol>
+<li><p>与留出法一样，也需要保持数据分布的一致性。</p>
+</li>
+<li><p>k的取值，常见的有10次10折交叉验证，也就是k=10</p>
+</li>
+<li><p>如果数据的样本数m和分成的子集数量k相等，这个时候每一个测试集其实只有一个样本，这种方法也被称为留一法，往往留一法被认为比较准确，但是换来的结果是开销会非常大，再者结果也未必精确，因为NFL定理在这里同样适用。</p>
+</li>
+</ol>
+<h3 id="自助法"><a href="#自助法" class="headerlink" title="自助法"></a>自助法</h3><p>自助法对于包含m个样本的数据集$D$，对它进行采样产生数据集$D\prime$,每次一从D中随机挑选一个样本，将其拷贝放入$D\prime$，然后再把这个样本放回到$D$中，是的样本在下次采样的时候让然能够被采集到；把这个过程重复执行m次之后，就得到了包含m个样本数据$D\prime$ ，这样做的结果是$D$中会有一部分样本在$D\prime$中多次出现，而另一部分不出现。而样本在$m$次采集中始终不被采集到的概率是$(1-\frac{1}{m})^m$,取极限得到：<br>$$\lim_{m\rightarrow+\infty} (1-\frac{1}{m})^m\rightarrow \frac{1}{m} \approx 0.368$$</p>
+<p>于是，我们可以将$D\prime$用作训练集，$D - D\prime$用作测试集；这样实际评估的模型和期望评估的模型都是用m个训练样本，而我们仍有数据总量越$1/3$的、没在训练集中出现的样本用于测试，这样的测试结果，也称作“包外估计”。</p>
+<p>要注意的问题：</p>
+<ol>
+<li><p>自助法在数据集比较小，难以有效划分训练集、测试集的时候很有用。同时，自助法能从初始数据集中产生多个不同的训练集。</p>
+</li>
+<li><p>自助法产生的数据集改变了初始数据集的分布，会引入估计偏差，当数据量足够的时候留出法和交叉验证法更常用一些。</p>
+</li>
+</ol>
+<h2 id="性能度量"><a href="#性能度量" class="headerlink" title="性能度量"></a>性能度量</h2><p>对机器学习的泛化性能进行评估，除了上面的评估其误差外，还需要去评估其能力，这就是性能度量。也就是预测的数值到底和原始数值有多接近。</p>
+<p>在预测任务中，给定样例集$D={(x_1,y_1), (x_2,y_2),\cdots ,(x_m,y_m) }$，其中$y_i$是实例$x_i$的真实标记，要评估学习器$f$的性能，就要把学习器预测结果$f(x)$与真实标记$y$作比较。</p>
+<h3 id="回归问题的性能度量：-均方误差-mean-squared-error"><a href="#回归问题的性能度量：-均方误差-mean-squared-error" class="headerlink" title="回归问题的性能度量： 均方误差(mean squared error)"></a>回归问题的性能度量： 均方误差(mean squared error)</h3><p>回归任务最常用的性能度量是均方误差（方差的平均数）：<br>$$E(f;D) = \frac{1}{m} \sum_{i=1}^{m}(f(x_i)-y)^2$$<br>更一般的，对于数据分布$D$和概率密度函数$p(*),均方误差可以描述为$<br>$$E(f;D) = \int_{x-D}(f(x)-y)^2p(x)dx$$</p>
+<h3 id="分类问题的粗略度量：错误率与精度"><a href="#分类问题的粗略度量：错误率与精度" class="headerlink" title="分类问题的粗略度量：错误率与精度"></a>分类问题的粗略度量：错误率与精度</h3><p>错误率和精度是分类任务中常用的两种性能度量，既适用于二分类任务，也适用于多分类任务。错误率是分类错误的样本数占样本总数的比例，精度则是分类正确的样本数占总数的比例。<br>错误率可以定义为：<br>$$E(f;D) = \frac{1}{M} \sum_{i=1}^{m} \amalg(f(x_i)\neq y_i)  $$<br>精度可以定义为：<br>$$add(f;D) = \frac{1}{M} \sum_{i=1}^{m} \amalg(f(x_i) = y_i) $$<br>$$ =1 - E(f;D) $$</p>
+<h3 id="分类任务的精确度量：查准率、查全率与F1"><a href="#分类任务的精确度量：查准率、查全率与F1" class="headerlink" title="分类任务的精确度量：查准率、查全率与Ｆ1"></a>分类任务的精确度量：查准率、查全率与Ｆ1</h3><p>错误率与精度虽然常用，但不能满足所有任务需求。比如，在一个人工智能辅助诊断病情的模型中，错误率衡量的是有多少比例的人的身体状况被判别错误，但是我们关心的是“有多少<strong>**</strong>有病<strong>的人被诊断出来</strong>没有病**”，那么错误率显然是不能给出答案的。查准率与查全率则更适应于此类场景。</p>
+<p>拿最简单的二分类问题来说,对于二分类问题，可以根据真实类别与机器学习预测的类别的组合划分出来四种不同的情况，假设上面的诊断模型输出的结果为有病或没病，那么预测结果与真实结果可以得到下面组合：</p>
+<table>
+<thead>
+<tr>
+<th>情况</th>
+<th>预测有病</th>
+<th>预测没病</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>真实有病</td>
+<td>130</td>
+<td>40</td>
+</tr>
+<tr>
+<td>真实没病</td>
+<td>50</td>
+<td>200</td>
+</tr>
+</tbody>
+</table>
+<p>我们想要知道的是，有病的人是真的有病，而不是假的有病，真的有病的人又查出来了几个，用上面的表格计算可以得到：</p>
+<p>$$ 查的全不全=\frac{真的有病查出来也有病}{真的有病查出来也有病+真的有病但没查出来}=\frac{130}{130+40}$$ </p>
+<p>$$查的准不准=\frac{真的有病查出来也有病}{真实没病但查出来有病}=\frac{130}{130+50}$$</p>
+<p>可以看出来，查的全不全这个问题上，模型诊断出来了130个人是有病的，但是事实上真实有病的病人一共有130+40个，漏掉了40个真的有病的人。 $\frac{130}{130+40}$就是查全率。</p>
+<p>而对于查的准不准这个问题上，预测了130+50个人是有病的，但是这其中50个人其实是没有病的，真正正确的只有130个人，其他50个人是假的有病（网络流行语）。<br>$\frac{130}{130+50}$就是查准率。</p>
+<p>把上面这个看病的例子，用一个泛型（面向对象程序设计中的一种实现多态，多类型支持的技巧）来描述，就有了下面这个混淆矩阵：</p>
+<table>
+<thead>
+<tr>
+<th>情况</th>
+<th>预测为True</th>
+<th>预测为False</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>真实为True</td>
+<td>TP(真正例)</td>
+<td>FN(假反例)</td>
+</tr>
+<tr>
+<td>真实为False</td>
+<td>FP(假正例)</td>
+<td>TN(真反例)</td>
+</tr>
+</tbody>
+</table>
+<p>对于这个矩阵，查准率P与查全率R可以表示为：<br>$$P=\frac{TP}{TP+FP}$$<br>$$R=\frac{TP}{TP+FN}$$</p>
+<p>很明显，查准率与查全率是一对相互矛盾的度量。一般来说，查准率高的时候，查全率往往会偏低;查全率高的时候，查准率往往偏低。追求查准率和查全率都没有错，但是大部分时候只能选一个，这个要取决于具体的问题，比如上面的问题中，我们宁愿把没病的人诊断成有病，也不要错过一个真是有病的人被诊断为没病（这不是耽搁人嘛），所以我们应该追求的是查全率。但另一方面，我们又不希望给没有病的人造成没有必要的麻烦，这个时候应该去追求较高的查准率。对于看病这个问题，很多时候我们更倾向于查全，尽管会造成查准率降低。</p>
+<p><strong>PR图</strong></p>
+<p>但是并不是所有的问题都像看病问题这个特殊，大部分时候我们需要同时考虑查准率与查全率，根据查准率与查全率可以绘制出来P-R曲线和P-R图：</p>
+<p><img src="http://o8orq3ka2.bkt.clouddn.com/PR.png" alt="PR-曲线图"></p>
+<p>如果一个学习器的PR曲线被另一个学习器的PC曲线完全包住，则后者的性能优于前者。上图中A明显优于C。</p>
+<p><strong>BEP</strong></p>
+<p>如果两个学习器的PR曲线相交，就不能着急下结论了，这个时候一般回家算两条曲线下面包裹的面积，面积大的很明显取得PR双高的概率要更高。但是这个不太容易估算。对此，有人设计了BEP，平衡点（Break-Even Point）。</p>
+<p>BEP是指查准率=查全率时候的取值，也就是画一条直线$f(x)=x$，曲线和这条直线的交点就是BEP。比如上图中A的BEP为0.8，B的BEP为0.72， 按照BEP来比较，学习器A优于B。但是，这也并不是绝对的，毕竟BEP还是过于简化了些。，更常用的方法是F1度量.</p>
+<p>**F1</p>
+<p>在一些应用中，对查准率和查全率的重视程度是不同的，比如上面看病的例子，更加追求查全率，以避免错过真正有病的人。但是在用户分类系统中，为了避免打扰到用户，把人家不喜欢的东西推给人家真的很烦啦。。。。，这个时候更侧重于查准率。F1度量可以帮助我们很好的去找到适合我们的点。</p>
+<p>$$F_\beta=\frac{(1+\beta^2)×P×R}{(\beta^2×P)+R} $$</p>
+<p>其中$\beta&gt;$0度量了查全率对查准率的相对重要性。</p>
+<ul>
+<li>$\beta=1$时退化为标准的F1; </li>
+<li>$\beta&gt;1$的时候查全率有更大影响；</li>
+<li>$\beta&lt;1$的时候查准率有更大影响；</li>
+</ul>
+<p>对于多分类问题的多个混淆矩阵，或者二分类问题的多次训练得出的多个混淆矩阵。这个时候要综合考虑其查准率，查全率。</p>
+<p>一种直接的做法是现在各个混淆矩阵上计算出来各自的查准率与查全率，在计算平均值，得到宏查准率(macro-P)、宏查全率(macro-R)，以及对应的宏F1(macro-F1):</p>
+<p>$$macro-P=\frac{1}{n}\sum_{i=1}^nP_i$$<br>$$macro-R=\frac{1}{n}\sum_{i=1}^nR_i$$<br>$$macro-F1=\frac{2×macro-P×macro-R}{macro-P+macro-R}$$</p>
+<p>还可以现将各个混淆矩阵对应的元素进行平均，得到TP、FP、TN、FN的平均值记做$\overline{TP}$、$\overline{FP}$、$\overline{TN}$、$\overline{FN}$,在基于这些平均值计算微查准率(micro-P)、微查全率(micro-R)以及微F<br>1(micro-F1):</p>
+<p>$$micro-P=\frac{\overline{TP}}{\overline{TP}+\overline{FP}}$$<br>$$micro-R=\frac{\overline{TP}}{\overline{TP}+\overline{FN}}$$<br>$$micro-F1=\frac{2×micro-P×micro-R}{micro-P+micro-R}$$</p>
+<h2 id="总结和后续"><a href="#总结和后续" class="headerlink" title="总结和后续"></a>总结和后续</h2><p>这篇笔记首先总结了模型评估中的三种评估方法，然后介绍了分类任务中常用的模型性能度量的方法，其中错误率与精度描述了模型在分类任务中的错误率与精确程度，一定程度上描述了模型的能力，但是在特定问题中还需要对更多具体的进行评估，错误率与精度并不能反映具体的分类情况。查准率与查全率很好的反映了模型在不同情况下的情况，但是到底选择P还是R，应该具体问题具体对待，有时候可以取BEP，让P与R相等。有时候对查准率与查全率有不同比例的侧重，这个时候则可以根据F1来进行度量，根据需求扩展F1到$F_\beta$.</p>
+<p>写一篇文章，将会继续总结机器学习中的性能测量方法。有了性能测量方法，测量得到学习器性能之后，还会需要比较检验，以及使用方差偏差分解去解释算法的泛化性能。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2018/07/08/模型的评估与选择——上/">模型的评估与选择(第一部分)</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">Andy</a></p>
+        <p><span>发布时间:</span>2018-07-08, 19:24:47</p>
+        <p><span>最后更新:</span>2018-08-13, 15:13:21</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2018/07/08/模型的评估与选择——上/" title="模型的评估与选择(第一部分)">http://mazingan.github.io/2018/07/08/模型的评估与选择——上/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://mazingan.github.io/2018/07/08/模型的评估与选择——上/　　作者: Andy" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2018/07/13/机器学习中对线性回归模型的检验与评估-sklearn实现/">
+                    机器学习中对线性回归模型的检验与评估(sklearn实现)
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2018/07/08/机器学习的基本概念和术语/">
+                    机器学习的基本概念和术语
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#经验误差与过拟合"><span class="toc-number">1.</span> <span class="toc-text">经验误差与过拟合</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#评估方法"><span class="toc-number">2.</span> <span class="toc-text">评估方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#留出法（hold-out）"><span class="toc-number">2.1.</span> <span class="toc-text">留出法（hold-out）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#交叉验证法"><span class="toc-number">2.2.</span> <span class="toc-text">交叉验证法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#自助法"><span class="toc-number">2.3.</span> <span class="toc-text">自助法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#性能度量"><span class="toc-number">3.</span> <span class="toc-text">性能度量</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#回归问题的性能度量：-均方误差-mean-squared-error"><span class="toc-number">3.1.</span> <span class="toc-text">回归问题的性能度量： 均方误差(mean squared error)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分类问题的粗略度量：错误率与精度"><span class="toc-number">3.2.</span> <span class="toc-text">分类问题的粗略度量：错误率与精度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分类任务的精确度量：查准率、查全率与F1"><span class="toc-number">3.3.</span> <span class="toc-text">分类任务的精确度量：查准率、查全率与Ｆ1</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结和后续"><span class="toc-number">4.</span> <span class="toc-text">总结和后续</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-4 i,
+        .toc-level-4 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+            "common":{"bdSnsKey":{},"bdText":"模型的评估与选择(第一部分)　| Andy's Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='https://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2018/07/13/机器学习中对线性回归模型的检验与评估-sklearn实现/" title="上一篇: 机器学习中对线性回归模型的检验与评估(sklearn实现)">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2018/07/08/机器学习的基本概念和术语/" title="下一篇: 机器学习的基本概念和术语">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/08/13/普林斯顿算法课第二周-queue/">普林斯顿算法课第二周-queue</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/05/普林斯顿算法课第二周-stack/">普林斯顿算法课第二周:stack</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/13/机器学习中对线性回归模型的检验与评估-sklearn实现/">机器学习中对线性回归模型的检验与评估(sklearn实现)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/08/模型的评估与选择——上/">模型的评估与选择(第一部分)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/08/机器学习的基本概念和术语/">机器学习的基本概念和术语</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/07/python经典面试题收录/">python经典面试题收录</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/02/直线、面、相交和高斯消元/">直线、面、相交和高斯消元</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/01/向量的基本知识和原理/">向量的基本知识和原理</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/01/Who-Are-You-You-Are-Every-Single-Day/">Who Are You, You Are Every Single Day.</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/28/算法基础——基本排序算法/">算法基础——基本排序算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/27/python语言特性之引用/">python语言特性之引用</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/27/使用namedtupe构建没有方法的对象/">使用namedtupe构建没有方法的对象</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/27/关于Django的CSRF和跨域访问机制/">关于Django的CSRF和跨域访问机制</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/27/基于面部识别的日志系统的设计与实现/">基于面部识别的日志系统的设计与实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/27/直播平台概述和直播服务器架设-md/">直播平台概述和直播服务器架设.md</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/27/读《岛上书店》和《无声告白》有感/">读《岛上书店》和《无声告白》有感</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2018 Andy
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+    <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+             tags: ".article-tag a", 
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+             menu: ".header-menu a", 
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+    <script>
+        var originTitle = document.title;
+        var titleTime;
+        document.addEventListener("visibilitychange", function() {
+            if (document.hidden) {
+                document.title = "(つェ⊂) 我藏好了哦~ " + originTitle;
+                clearTimeout(titleTime);
+            }
+            else {
+                document.title = "(*´∇｀*) 被你发现啦~ " + originTitle;
+                titleTime = setTimeout(function() {
+                    document.title = originTitle;
+                }, 2000);
+            }
+        })
+    </script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
