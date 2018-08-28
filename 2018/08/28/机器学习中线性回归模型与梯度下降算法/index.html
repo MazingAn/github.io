@@ -15,22 +15,22 @@
 
 
 
-<meta name="description" content="回归分析中，只包括一个自变量和一个因变量，且二者的关系可用一条直线近似表示，这种回归分析称为一元线性回归分析。如果回归分析中包括两个或两个以上的自变量，且因变量和自变量之间是线性关系，则称为多元线性回归分析。 监督学习的模型表示对于监督学习(supervised learning)，给定训练集，尝试习得函数$h:X \rightarrowY$使得函数$h(x)$最大限度接近y.函数$h$一般被称为">
+<meta name="description" content="统计学中对线性回归的定义：回归分析中，只包括一个自变量和一个因变量，且二者的关系可用一条直线近似表示，这种回归分析称为一元线性回归分析。如果回归分析中包括两个或两个以上的自变量，且因变量和自变量之间是线性关系，则称为多元线性回归分析。">
 <meta name="keywords" content="机器学习">
 <meta property="og:type" content="article">
 <meta property="og:title" content="机器学习中线性回归模型与梯度下降算法（第一部分）">
 <meta property="og:url" content="http://mazingan.github.io/2018/08/28/机器学习中线性回归模型与梯度下降算法/index.html">
 <meta property="og:site_name" content="Andy&#39;s Blog">
-<meta property="og:description" content="回归分析中，只包括一个自变量和一个因变量，且二者的关系可用一条直线近似表示，这种回归分析称为一元线性回归分析。如果回归分析中包括两个或两个以上的自变量，且因变量和自变量之间是线性关系，则称为多元线性回归分析。 监督学习的模型表示对于监督学习(supervised learning)，给定训练集，尝试习得函数$h:X \rightarrowY$使得函数$h(x)$最大限度接近y.函数$h$一般被称为">
+<meta property="og:description" content="统计学中对线性回归的定义：回归分析中，只包括一个自变量和一个因变量，且二者的关系可用一条直线近似表示，这种回归分析称为一元线性回归分析。如果回归分析中包括两个或两个以上的自变量，且因变量和自变量之间是线性关系，则称为多元线性回归分析。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://o8orq3ka2.bkt.clouddn.com/supervise-hepothesis.png">
 <meta property="og:image" content="http://o8orq3ka2.bkt.clouddn.com/DeepinScreenshot_select-area_20180828220501.png">
 <meta property="og:image" content="http://o8orq3ka2.bkt.clouddn.com/DeepinScreenshot_select-area_20180828220510.png">
 <meta property="og:image" content="http://o8orq3ka2.bkt.clouddn.com/cost-function-linear.jpg">
-<meta property="og:updated_time" content="2018-08-28T14:19:38.266Z">
+<meta property="og:updated_time" content="2018-08-28T14:20:58.326Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习中线性回归模型与梯度下降算法（第一部分）">
-<meta name="twitter:description" content="回归分析中，只包括一个自变量和一个因变量，且二者的关系可用一条直线近似表示，这种回归分析称为一元线性回归分析。如果回归分析中包括两个或两个以上的自变量，且因变量和自变量之间是线性关系，则称为多元线性回归分析。 监督学习的模型表示对于监督学习(supervised learning)，给定训练集，尝试习得函数$h:X \rightarrowY$使得函数$h(x)$最大限度接近y.函数$h$一般被称为">
+<meta name="twitter:description" content="统计学中对线性回归的定义：回归分析中，只包括一个自变量和一个因变量，且二者的关系可用一条直线近似表示，这种回归分析称为一元线性回归分析。如果回归分析中包括两个或两个以上的自变量，且因变量和自变量之间是线性关系，则称为多元线性回归分析。">
 <meta name="twitter:image" content="http://o8orq3ka2.bkt.clouddn.com/supervise-hepothesis.png">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
@@ -310,7 +310,8 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>回归分析中，只包括一个自变量和一个因变量，且二者的关系可用一条直线近似表示，这种回归分析称为一元线性回归分析。如果回归分析中包括两个或两个以上的自变量，且因变量和自变量之间是线性关系，则称为多元线性回归分析。</p>
+        <p>统计学中对线性回归的定义：<br>回归分析中，只包括一个自变量和一个因变量，且二者的关系可用一条直线近似表示，这种回归分析称为一元线性回归分析。如果回归分析中包括两个或两个以上的自变量，且因变量和自变量之间是线性关系，则称为多元线性回归分析。</p>
+<a id="more"></a>
 <h2 id="监督学习的模型表示"><a href="#监督学习的模型表示" class="headerlink" title="监督学习的模型表示"></a>监督学习的模型表示</h2><p>对于监督学习(supervised learning)，给定训练集，尝试习得函数$h:X \rightarrow<br>Y$使得函数$h(x)$最大限度接近y.函数$h$一般被称为假设函数(hypothesis).</p>
 <p><img src="http://o8orq3ka2.bkt.clouddn.com/supervise-hepothesis.png" alt="监督学习的假设函数"></p>
 <h2 id="代价函数"><a href="#代价函数" class="headerlink" title="代价函数"></a>代价函数</h2><p>我们可以通过代价函数(cost<br>function)来对假设函数的效果进行测量，测量的本质就是检测$h(x)$与$y$是否足够接近。对于线性回归问题，一般使用最小二乘法(均方误差)来进行测量，这样做的好处是可以适用于高维空间，但是针对不同问题也可使用不同的代价函数，比如对于二维空间内的线性回归问题使用绝对值来表示实际值与预测值之间的误差也是可以的。</p>
@@ -369,7 +370,7 @@
         <p><span>本文标题:</span><a href="/2018/08/28/机器学习中线性回归模型与梯度下降算法/">机器学习中线性回归模型与梯度下降算法（第一部分）</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Andy</a></p>
         <p><span>发布时间:</span>2018-08-28, 21:06:34</p>
-        <p><span>最后更新:</span>2018-08-28, 22:19:38</p>
+        <p><span>最后更新:</span>2018-08-28, 22:20:58</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2018/08/28/机器学习中线性回归模型与梯度下降算法/" title="机器学习中线性回归模型与梯度下降算法（第一部分）">http://mazingan.github.io/2018/08/28/机器学习中线性回归模型与梯度下降算法/</a>
             <span class="copy-path" data-clipboard-text="原文: http://mazingan.github.io/2018/08/28/机器学习中线性回归模型与梯度下降算法/　　作者: Andy" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
